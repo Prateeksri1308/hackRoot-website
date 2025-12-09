@@ -27,7 +27,7 @@
     <section id="home" class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <h1>HackRoot — Build. Learn. Win.</h1>
+          <h1><span><span class="h">𝐡</span>ack<span class="R">𝐑</span>oot</span>  — Build. Learn. Win.</h1>
           <p class="lead">A focused hackathon team building AI-first, production-ready projects.</p>
           <div class="hero-ctas">
             <a href="#team" class="btn-primary">Meet the Team</a>
@@ -35,10 +35,10 @@
           </div>
         </div>
         <div class="hero-media">
-          <div class="project-preview">
+         <!--  <div class="project-preview">
             <h4>Project Idea: AI Fake News & Scam Detector</h4>
             <p>ML classification + GenAI explanation engine — Flask backend + React dashboard.</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
@@ -152,7 +152,7 @@
     <section id="contact" class="section alt">
       <div class="container contact-inner">
         <h2>Join / Contact</h2>
-        <form id="joinForm" class="contact-form">
+        <form id="joinForm" class="contact-form" action="http://127.0.0.1:5000/submit" method="POST">
           <input name="name" placeholder="Your name" required />
           <input name="email" type="email" placeholder="Email" required />
           <input name="github" placeholder="GitHub / LinkedIn (optional)" />
@@ -169,6 +169,7 @@
       <small>Meeting cadence: Weekly check-ins (Dec–Jan) → 2x/week (Feb–Mar) → Daily (April).</small>
     </div>
   </footer>
+
 
   <script src="Js/script.js"></script>
 </body>

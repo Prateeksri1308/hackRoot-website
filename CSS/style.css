@@ -55,6 +55,80 @@ h2{color:var(--card); margin-bottom:10px}
 .contact-form{display:grid; gap:12px; max-width:640px}
 .contact-form input, .contact-form textarea{padding:12px; border-radius:8px; border:1px solid rgba(11,27,43,0.06)}
 .site-footer{padding:28px 0; border-top:1px solid rgba(255,255,255,0.03); color:#cfe7ff; background:transparent}
+h1 span{
+    color: green;
+    font-size: larger;
+}
+.h{
+  font-size: 8rem;
+  font-weight: bolder;
+  height: 10rem;
+  /* font-style: ; */
+}
+.R{
+   /* font-size: 10rem;
+  font-weight: bolder;
+  height: 10rem;
+  font-style: ; */
+}
+/* FAST PREMIUM LOADING OVERLAY */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+.loading-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Minimal clean loader */
+.fast-loader {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255,255,255,0.25);
+  border-top-color: #4ade80; /* green accent */
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* success check */
+.fast-check {
+  width: 60px;
+  height: 60px;
+  background: #22c55e;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transform: scale(0.7);
+  transition: 220ms ease;
+}
+
+.fast-check.show {
+  opacity:1;
+  transform: scale(1);
+}
+
+.fast-check svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+}
 
 /* Responsive */
 @media (max-width:900px){ .hero-inner{flex-direction:column; align-items:flex-start} .header-inner{align-items:center} .nav{display:none} .nav-toggle{display:block} }
