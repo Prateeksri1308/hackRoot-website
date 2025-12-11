@@ -147,20 +147,78 @@
         </div>
       </div>
     </section>
+    <!-- <form id="joinForm" class="premium-form" action="http://127.0.0.1:5000/submit" method="POST"> -->
 
     <!-- Contact -->
-    <section id="contact" class="section alt">
-      <div class="container contact-inner">
-        <h2>Join / Contact</h2>
-        <form id="joinForm" class="contact-form" action="http://127.0.0.1:5000/submit" method="POST">
-          <input name="name" placeholder="Your name" required />
-          <input name="email" type="email" placeholder="Email" required />
-          <input name="github" placeholder="GitHub / LinkedIn (optional)" />
-          <textarea name="message" rows="4" placeholder="How you'd like to help"></textarea>
-          <button class="btn-primary" type="submit">Send</button>
+    <section id="contact" class="section contact-fullwidth">
+  <div class="contact-fullwidth-bg">
+    <div class="container contact-form-wrap">
+      <div class="form-panel">
+        <div class="panel-head">
+          <h2>Join / Contact</h2>
+          <p class="muted">Tell us how you'd like to help — one message, long-term impact.</p>
+        </div>
+
+        <form id="joinForm" class="premium-form"  action="http://127.0.0.1:5000/submit" method="POST" novalidate>
+          <div class="row">
+            <div class="field">
+              <input name="name" type="text" id="name" placeholder=" " required aria-label="Your name" />
+              <label for="name">Your Name</label>
+            </div>
+
+            <div class="field">
+              <input name="email" type="email" id="email" placeholder=" " required aria-label="Email address" />
+              <label for="email">Email Address</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field phone-field">
+              <span class="country" aria-hidden="true">+91</span>
+              <input name="phone" type="tel" id="phone" inputmode="numeric" pattern="[0-9]*" placeholder=" " maxlength="10" required aria-label="Mobile number" />
+              <label for="phone">Mobile Number</label>
+            </div>
+
+            <div class="field">
+              <input name="github" type="text" id="github" placeholder=" " aria-label="GitHub or LinkedIn (optional)" />
+              <label for="github">GitHub / LinkedIn (optional)</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <textarea name="message" id="message" rows="5" placeholder=" " required aria-label="How you'd like to help"></textarea>
+            <label for="message">How you'd like to help</label>
+          </div>
+
+          <div class="form-controls">
+            <button type="submit" class="submit-btn" aria-live="polite">
+              <span class="btn-inner">
+                <svg class="icon-send" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+                <span class="btn-text">Send Message</span>
+              </span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+
+            <div class="status-msg" aria-hidden="true"></div>
+          </div>
         </form>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- success modal (hidden) -->
+  <div id="successModal" class="success-modal" role="status" aria-hidden="true">
+    <div class="success-card">
+      <div class="checkmark">
+        <svg viewBox="0 0 52 52"><path d="M14 27 L22 34 L38 16" /></svg>
+      </div>
+      <h3>Thanks — message received</h3>
+      <p>We'll get back to you soon. Welcome to HackRoot.</p>
+      <button id="closeSuccess" class="btn-ghost">Close</button>
+    </div>
+  </div>
+</section>
+
   </main>
 
   <footer class="site-footer">
@@ -170,7 +228,18 @@
     </div>
   </footer>
 
+<!-- GIF SUCCESS POPUP -->
 
-  <script src="Js/script.js"></script>
+  
+  <div id="gifPopup" class="gif-popup" aria-hidden="true">
+    <div class="gif-panel" id="gifPanel">
+      <img src="Assets/Success.gif" class="gif-tick" alt="Success" />
+      <h3 id="gifTitle">Message Sent!</h3>
+      <p id="gifMessage">We'll get back to you soon.</p>
+    </div>
+  </div>
+
+<script src="Js/script.js"></script>
+
 </body>
 </html>

@@ -134,6 +134,316 @@ h1 span{
   height: 28px;
   fill: white;
 }
+/* prateek - form section  */
+/* -------------------- Full-width contact + Premium form (UPDATED) -------------------- */
+
+.contact-fullwidth { padding: 0; }
+.contact-fullwidth-bg {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(2,8,35,0.86) 0%, rgba(5,12,40,0.75) 60%);
+  border-top: 1px solid rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  padding: 56px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft decorative glow */
+.contact-fullwidth-bg::before{
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  background: radial-gradient(closest-side, rgba(30,144,255,0.06), transparent 40%),
+              radial-gradient(closest-side, rgba(0,212,255,0.03), transparent 30%);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+/* container inside full width */
+.contact-form-wrap { max-width: var(--container); padding: 40px 20px; margin: 0 auto; }
+
+/* main form panel */
+.form-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border-radius: 18px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 20px 60px rgba(2,6,23,0.45);
+  backdrop-filter: blur(8px) saturate(120%);
+}
+
+/* header */
+.panel-head h2 { color: var(--card); margin: 0 0 6px; font-size: 1.6rem; }
+.panel-head .muted { color: var(--muted); opacity: .95; margin-bottom: 6px; }
+
+/* layout rows */
+.premium-form .row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width:900px){ .premium-form .row{ grid-template-columns: 1fr; } }
+
+/* field base */
+.field {
+  position: relative;
+  margin-bottom: 22px; /* extra breathing room for floating labels */
+}
+
+/* inputs & textarea */
+.premium-form input,
+.premium-form textarea {
+  width: 100%;
+  padding: 16px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: var(--card);
+  font-size: 0.98rem;
+  outline: none;
+  transition: box-shadow .18s ease, transform .12s ease, border-color .18s ease;
+  caret-color: var(--accent2);
+  -webkit-appearance: none;
+}
+
+/* placeholder trick (use placeholder=" " in HTML) */
+.field input::placeholder, .field textarea::placeholder { color: transparent; }
+
+/* floating label */
+.field label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all .22s cubic-bezier(.2,.9,.2,1);
+  color: rgba(207,231,255,0.85);
+  background: transparent;
+  padding: 0 6px;
+  z-index: 2;
+}
+
+/* focus/active state for inputs */
+.premium-form input:focus,
+.premium-form textarea:focus { 
+  box-shadow: 0 6px 24px rgba(14,32,80,0.35);
+  border-color: rgba(30,144,255,0.95);
+  transform: translateY(-1px);
+}
+
+/* floating state (more vertical spacing) */
+.premium-form input:focus + label,
+.premium-form textarea:focus + label,
+.premium-form input:not(:placeholder-shown) + label,
+.premium-form textarea:not(:placeholder-shown) + label {
+  top: -12px;                 /* moved farther up so it doesn't collide */
+  left: 12px;
+  font-size: 0.78rem;
+  color: var(--accent2);
+  background: #071428;        /* matches dark theme behind label */
+  padding: 0 6px;
+  border-radius: 6px;
+  z-index: 4;
+}
+
+/* ------------- Phone field (fixed & premium) ------------- */
+.phone-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* +91 prefix block */
+.phone-field .country{
+  display:flex; align-items:center; justify-content:center;
+  padding: 14px 14px; /* slightly wider for breathing room */
+  border-radius:12px 0 0 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color: var(--card);
+  font-weight:700;
+  z-index: 3;
+  flex: 0 0 auto;
+}
+
+/* input inside phone field — push content right to avoid overlap */
+.phone-field input {
+  border-radius: 0 12px 12px 0;
+  border-left: none;
+  padding-left: 60px !important; /* IMPORTANT: keeps text clear of the prefix */
+  min-width: 0; /* fixes flexbox overflow in some browsers */
+}
+
+/* floating label inside phone field: align with padded input area */
+.phone-field label {
+  left: 60px; /* align with input text area */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* when floating, adjust left slightly to keep neat */
+.phone-field input:focus + label,
+.phone-field input:not(:placeholder-shown) + label {
+  top: -12px;
+  left: 56px;
+  font-size: 0.78rem;
+  background: #071428;
+  padding: 0 6px;
+  z-index: 4;
+}
+
+/* textarea height */
+.premium-form textarea { min-height:120px; resize:vertical; }
+
+/* submit area */
+.form-controls { display:flex; gap:12px; align-items:center; margin-top:4px; flex-wrap:wrap; }
+
+/* submit button polished */
+.submit-btn {
+  display:inline-flex; align-items:center; gap:12px;
+  padding:12px 18px; border-radius:12px; border:none;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color:white; font-weight:700; cursor:pointer; box-shadow: 0 8px 30px rgba(30,144,255,0.18);
+  transition: transform .12s ease, box-shadow .18s ease, opacity .12s ease;
+  position:relative; overflow:hidden;
+}
+.submit-btn:active{ transform: translateY(1px) scale(.998); }
+.submit-btn .icon-send { width:18px; height:18px; fill:rgba(255,255,255,0.95); transform: translateX(0); transition: transform .22s cubic-bezier(.2,.9,.2,1); }
+.submit-btn .btn-text{ letter-spacing:.2px; }
+
+/* spinner */
+.btn-spinner{
+  width:20px; height:20px; border-radius:50%;
+  border: 2px solid rgba(255,255,255,0.35); border-top-color: rgba(255,255,255,0.95);
+  display:inline-block; margin-left:8px; transform: scale(.6); opacity:0; pointer-events:none;
+  transition: opacity .18s ease, transform .18s ease;
+  animation: spin .8s linear infinite;
+}
+
+/* loading state */
+.submit-btn.loading { pointer-events:none; opacity:.98; }
+.submit-btn.loading .btn-text { opacity:0; transform: translateX(-6px); }
+.submit-btn.loading .icon-send { transform: translateX(-8px); opacity:0.0; }
+.submit-btn.loading .btn-spinner { opacity:1; transform: scale(1); }
+
+/* small spinner keyframes (reused) */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* status message */
+.status-msg { color: #bcdffb; font-size:0.95rem; margin-left:6px; }
+
+/* success modal */
+.success-modal {
+  position: fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(180deg, rgba(3,6,12,0.45), rgba(3,6,12,0.6));
+  z-index:9999; opacity:0; pointer-events:none; transition: opacity .22s ease;
+}
+.success-modal.show { opacity:1; pointer-events:auto; }
+.success-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px; padding:28px; text-align:center; width: min(520px, 92%);
+  border:1px solid rgba(255,255,255,0.06); box-shadow: 0 22px 70px rgba(2,6,23,0.6);
+}
+.checkmark svg { width:72px; height:72px; stroke: none; fill: none; }
+.checkmark { width:92px; height:92px; border-radius:50%; margin: 0 auto 8px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(90deg,#22c55e,#16a34a); box-shadow: 0 8px 30px rgba(34,197,94,0.16);
+}
+.checkmark svg path { stroke: white; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; fill:none; }
+
+/* small helpers */
+.btn-ghost { background: transparent; border:1px solid rgba(255,255,255,0.06); color: #cfe7ff; padding:8px 12px; border-radius:10px; }
+
+/* responsive tweaks */
+@media (max-width:520px) {
+  .phone-field .country { padding: 12px 10px; font-size: 0.95rem; }
+  .phone-field input { padding-left: 54px !important; }
+  .phone-field label { left: 54px; }
+  .phone-field input:focus + label,
+  .phone-field input:not(:placeholder-shown) + label { left: 50px; }
+}
+.invalid {
+  border-color: #ff4d4d !important;
+  box-shadow: 0 0 10px rgba(255,0,0,0.3) !important;
+}
+
+.shake {
+  animation: shakeAnim 0.25s ease;
+}
+
+@keyframes shakeAnim {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+/* modal animation */
+.success-modal .success-card {
+  transform: translateY(8px) scale(.98);
+  opacity: 0;
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), opacity .28s ease;
+}
+.success-modal.show .success-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* subtle toast/status emphasis */
+.status-msg {
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* form-level shake for serious errors */
+form.shake { animation: shakeAnim 0.28s ease; }
+/* success popup (premium tick) */
+
+/* GIF SUCCESS POPUP */
+/* GIF SUCCESS POPUP */
+.gif-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 99999;
+}
+
+.gif-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gif-panel {
+  background: rgba(10, 25, 45, 0.9);
+  padding: 28px 32px;
+  border-radius: 18px;
+  text-align: center;
+  color: #dff6ff;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  transform: scale(0.85);
+  transition: transform 0.25s ease;
+}
+
+.gif-popup.show .gif-panel {
+  transform: scale(1);
+}
+
+.gif-tick {
+  width: 130px;
+  height: auto;
+  margin-bottom: 12px;
+  border-radius: 14px;
+}
+
 
 /* Responsive */
 @media (max-width:900px){ .hero-inner{flex-direction:column; align-items:flex-start} .header-inner{align-items:center} .nav{display:none} .nav-toggle{display:block} }
