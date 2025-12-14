@@ -4,23 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HackRoot — Team</title>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">HackRoot</a>
-      <nav class="nav">
-        <a href="#home">Home</a>
-        <a href="#team">Team</a>
-        <a href="#projects">Projects</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#contact" class="btn-outline">Join</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-    </div>
-  </header>
+
+  <!-- edit nav ---by Prateek  -->
+
+ <header class="site-header">
+  <div class="container header-inner">
+
+    <!-- BRAND -->
+    <a class="brand premium-brand" href="#home">
+  <span class="brand-main">hack</span><span class="brand-accent">Root</span>
+</a>
+
+
+    <!-- NAV -->
+    <nav class="nav" id="mainNav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#timeline" class="nav-link">Timeline</a>
+      <a href="#contact" class="nav-link nav-cta">Join</a>
+    </nav>
+
+    <!-- TOGGLE -->
+    <button class="nav-toggle" id="navToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+  </div>
+</header>
+
+<div id="navBackdrop" class="nav-backdrop"></div>
+
 
   <main>
     <!-- HERO -->

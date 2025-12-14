@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gifPopup.setAttribute("aria-hidden", "false");
 
     clearTimeout(gifAutoCloseTimer);
-    gifAutoCloseTimer = setTimeout(hideGifSuccess, 4500);
+    gifAutoCloseTimer = setTimeout(hideGifSuccess, 5000);
   }
 
   function hideGifSuccess() {
@@ -316,4 +316,89 @@ setTimeout(() => {
       el?.classList.remove("invalid")
     );
   }
+});
+/* ===============================
+   NAVBAR JS (Font Awesome)
+================================ */
+const header = document.querySelector(".site-header");
+const nav = document.getElementById("mainNav");
+const toggle = document.getElementById("navToggle");
+const icon = toggle.querySelector("i");
+const links = document.querySelectorAll(".nav-link");
+
+/* toggle menu */
+toggle.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  toggle.classList.toggle("open", open);
+  toggle.setAttribute("aria-expanded", open);
+
+  icon.classList.toggle("fa-bars", !open);
+  icon.classList.toggle("fa-xmark", open);
+});
+
+/* close on link click */
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("open");
+    toggle.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    icon.classList.add("fa-bars");
+    icon.classList.remove("fa-xmark");
+  });
+});
+
+/* active section + scroll effect */
+const sections = [...links].map(l => document.querySelector(l.getAttribute("href")));
+
+window.addEventListener("scroll", () => {
+  header.classList.toggle("scrolled", window.scrollY > 20);
+
+  const pos = window.scrollY + 120;
+  sections.forEach((sec, i) => {
+    if (!sec) return;
+    if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
+      links.forEach(l => l.classList.remove("active"));
+      links[i].classList.add("active");
+    }
+  });
+});
+/* LOGO SHRINK ON SCROLL */
+window.addEventListener("scroll", () => {
+  document
+    .querySelector(".site-header")
+    .classList.toggle("scrolled", window.scrollY > 12);
+});
+/* RIPPLE EFFECT */
+function addRipple(e) {
+  const el = e.currentTarget;
+  const circle = document.createElement("span");
+  const d = Math.max(el.clientWidth, el.clientHeight);
+  const rect = el.getBoundingClientRect();
+
+  circle.style.width = circle.style.height = `${d}px`;
+  circle.style.left = `${e.clientX - rect.left - d / 2}px`;
+  circle.style.top = `${e.clientY - rect.top - d / 2}px`;
+  circle.classList.add("ripple");
+
+  el.appendChild(circle);
+  setTimeout(() => circle.remove(), 600);
+}
+
+document.querySelector(".nav-toggle")?.addEventListener("click", addRipple);
+document.querySelectorAll(".nav-link").forEach(link =>
+  link.addEventListener("click", addRipple)
+);
+/* ===============================
+   HEADER SCROLL EFFECT
+================================ */
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 40) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+window.addEventListener("load", () => {
+  document.querySelector(".site-header").classList.add("loaded");
 });

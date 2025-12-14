@@ -448,3 +448,414 @@ form.shake { animation: shakeAnim 0.28s ease; }
 /* Responsive */
 @media (max-width:900px){ .hero-inner{flex-direction:column; align-items:flex-start} .header-inner{align-items:center} .nav{display:none} .nav-toggle{display:block} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+/* nav - by prateek */
+/* ===============================
+   PREMIUM BRAND (HackRoot)
+================================ */
+.premium-brand {
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.brand-h {
+  color: #4ade80;
+  font-size: 1.8rem;
+}
+
+.brand-r {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+/* subtle glow */
+.premium-brand:hover {
+  text-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+}
+
+/* ===============================
+   NAVBAR POLISH
+================================ */
+.site-header {
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(6, 18, 40, 0.9);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* links */
+.nav-link {
+  position: relative;
+  color: #dfeefb;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 2px;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: white;
+}
+
+/* animated underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* CTA */
+.nav-cta {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ===============================
+   TOGGLE BUTTON (FA ICON)
+================================ */
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-toggle.open {
+  transform: rotate(90deg);
+}
+
+/* ===============================
+   MOBILE NAV
+================================ */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 72px;
+    right: 20px;
+    width: min(280px, 90%);
+    background: rgba(8, 23, 55, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .nav.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+}
+/* ===== BRAND SYSTEM ===== */
+.premium-brand {
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-main {
+  color: #ffffff;
+}
+
+.brand-accent {
+  margin-left: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* hover polish */
+.premium-brand:hover {
+  opacity: 0.95;
+}
+/* ===============================
+   MOBILE NAV SAFE PADDING FIX
+================================ */
+.site-header .header-inner {
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
+}
+
+/* extra micro spacing for brand & toggle */
+.premium-brand {
+  margin-left: 2px;
+}
+
+.nav-toggle {
+  margin-right: 2px;
+}
+@media (max-width: 480px) {
+  .premium-brand {
+    margin-left: 4px;
+  }
+
+  .nav-toggle {
+    margin-right: 4px;
+  }
+}
+/* ===============================
+   LOGO SHRINK ON SCROLL
+================================ */
+.site-header {
+  transition: padding 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.premium-brand {
+  transition: transform 0.25s ease, font-size 0.25s ease;
+}
+
+.site-header.scrolled .premium-brand {
+  transform: scale(0.92);
+  opacity: 0.95;
+}
+/* ===============================
+   TOUCH RIPPLE EFFECT
+================================ */
+.nav-toggle,
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255,255,255,0.35);
+  animation: rippleAnim 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleAnim {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+@media (max-width: 900px) {
+  .nav {
+    position: fixed;
+    top: 76px;
+    right: 16px;
+    width: min(300px, 92%);
+    padding: 22px;
+
+    background: rgba(8, 23, 55, 0.92);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.1);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    opacity: 0;
+    transform: translateY(-14px) scale(0.96);
+    pointer-events: none;
+
+    transition:
+      opacity 0.28s ease,
+      transform 0.28s cubic-bezier(.2,.9,.2,1);
+  }
+
+  .nav.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .nav.open .nav-link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* stagger */
+  .nav.open .nav-link:nth-child(1){ transition-delay: .05s }
+  .nav.open .nav-link:nth-child(2){ transition-delay: .1s }
+  .nav.open .nav-link:nth-child(3){ transition-delay: .15s }
+  .nav.open .nav-link:nth-child(4){ transition-delay: .2s }
+  .nav.open .nav-link:nth-child(5){ transition-delay: .25s }
+}
+/* ===============================
+   NAV LINK PRESS + ACTIVE STATE
+================================ */
+.nav-link {
+  transition:
+    color 0.2s ease,
+    transform 0.12s ease,
+    background 0.2s ease;
+}
+
+.nav-link:active {
+  transform: scale(0.96);
+}
+
+/* active section highlight */
+.nav-link.active {
+  color: white;
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+/* ===============================
+   NAV BACKDROP (PREMIUM)
+================================ */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 8, 20, 0.55);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 30;
+}
+
+.nav-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* ===============================
+   TOGGLE ICON FEEDBACK
+================================ */
+.nav-toggle i {
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-toggle.open i {
+  transform: rotate(90deg) scale(1.1);
+}
+.nav-toggle:active {
+  transform: scale(0.94);
+}
+/* ===============================
+   LOGO MORPH ON SCROLL
+================================ */
+.premium-brand {
+  transition:
+    letter-spacing 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* scrolled state */
+.site-header.scrolled .premium-brand {
+  letter-spacing: -0.4px;
+  transform: scale(0.92);
+  opacity: 0.95;
+}
+
+/* individual letter tuning */
+.site-header.scrolled .brand-h {
+  font-size: 1.6rem;
+}
+
+.site-header.scrolled .brand-r {
+  filter: brightness(1.05);
+}
+.premium-brand:hover {
+  text-shadow:
+    0 0 12px rgba(74,222,128,0.35),
+    0 0 20px rgba(0,212,255,0.25);
+}
+.premium-brand {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-brand::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.25),
+    transparent 70%
+  );
+  transform: translateX(-120%);
+}
+
+.site-header.loaded .premium-brand::after {
+  animation: sheen 1.2s ease forwards;
+}
+
+@keyframes sheen {
+  to { transform: translateX(120%); }
+}
+.header-inner {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+@media (max-width: 520px) {
+  .premium-brand {
+    margin-left: 4px;
+  }
+
+  .nav-toggle {
+    margin-right: 4px;
+  }
+}
