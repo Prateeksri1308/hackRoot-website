@@ -133,3 +133,4 @@ h1 span{
 /* Responsive */
 @media (max-width:900px){ .hero-inner{flex-direction:column; align-items:flex-start} .header-inner{align-items:center} .nav{display:none} .nav-toggle{display:block} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+/* this is rough */
