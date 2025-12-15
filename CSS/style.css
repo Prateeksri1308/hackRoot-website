@@ -859,3 +859,228 @@ form.shake { animation: shakeAnim 0.28s ease; }
     margin-right: 4px;
   }
 }
+                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   PREMIUM TIMELINE (HackRoot)
+================================ */
+
+.timeline-section {
+  position: relative;
+}
+
+.timeline-title {
+  color: var(--card);
+  margin-bottom: 6px;
+}
+
+.timeline-sub {
+  max-width: 520px;
+}
+
+/* wrapper */
+.timeline-wrap {
+  position: relative;
+  margin-top: 48px;
+  padding-left: 28px;
+}
+
+/* vertical line */
+.timeline-wrap::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.05)
+  );
+}
+
+/* item */
+.timeline-item {
+  position: relative;
+  display: flex;
+  gap: 28px;
+  margin-bottom: 42px;
+}
+
+/* dot */
+.timeline-dot {
+  position: absolute;
+  left: -2px;
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #64748b;
+  z-index: 2;
+}
+
+/* states */
+.timeline-item.completed .timeline-dot {
+  background: #22c55e;
+}
+
+.timeline-item.active .timeline-dot {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 14px rgba(30,144,255,0.6);
+}
+
+.timeline-item.upcoming .timeline-dot {
+  background: #94a3b8;
+}
+
+/* card */
+.timeline-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.015)
+  );
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 18px 20px;
+  max-width: 520px;
+  box-shadow: 0 14px 40px rgba(2,6,23,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(2,6,23,0.6);
+}
+
+.timeline-card h3 {
+  color: white;
+  margin: 0 0 6px;
+}
+
+.timeline-card p {
+  color: #cfe7ff;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+/* tags */
+.timeline-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.4px;
+  background: rgba(255,255,255,0.08);
+  color: #e5f3ff;
+}
+
+.timeline-tag.glow {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: white;
+  box-shadow: 0 0 20px rgba(30,144,255,0.45);
+}
+
+/* highlight final card */
+.timeline-card.highlight {
+  border-color: rgba(30,144,255,0.45);
+}
+
+/* responsive */
+@media (max-width: 600px) {
+  .timeline-wrap {
+    padding-left: 20px;
+  }
+
+  .timeline-card {
+    max-width: 100%;
+  }
+}
+/* ===============================
+   SCROLL REVEAL (TIMELINE)
+================================ */
+.timeline-item {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.timeline-item.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+ 
+/* ===============================
+   TIMELINE PROGRESS LINE
+================================ */
+.timeline-progress {
+  position: absolute;
+  left: 6px;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background: linear-gradient(
+    180deg,
+    var(--accent),
+    var(--accent2)
+  );
+  transition: height 0.15s linear;
+  z-index: 1;
+}
+  
+
+.timeline-section {
+  padding-bottom: 96px;
+}
+
+
+.timeline-card {
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 520px) {
+  .timeline-card p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+}
+
+
+/* ===============================
+   CURRENT PHASE EMPHASIS
+================================ */
+.timeline-item.active .timeline-card {
+  border-color: rgba(30,144,255,0.6);
+  box-shadow:
+    0 0 0 1px rgba(30,144,255,0.4),
+    0 28px 70px rgba(30,144,255,0.35);
+}
+
+.timeline-item.active .timeline-card::after {
+  content: "CURRENT";
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: white;
+}

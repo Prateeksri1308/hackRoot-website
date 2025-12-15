@@ -402,3 +402,98 @@ window.addEventListener("scroll", () => {
 window.addEventListener("load", () => {
   document.querySelector(".site-header").classList.add("loaded");
 });
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   TIMELINE PROGRESS FILL (FIXED)
+================================ */
+const timelineWrap = document.querySelector(".timeline-wrap");
+const progressLine = document.getElementById("timelineProgress");
+
+window.addEventListener("scroll", () => {
+  if (!timelineWrap || !progressLine) return;
+
+  const rect = timelineWrap.getBoundingClientRect();
+  const viewHeight = window.innerHeight;
+
+  // start filling when timeline enters viewport
+  const start = viewHeight * 0.2;
+  const end = rect.height + start;
+
+  const progress = Math.min(
+    Math.max(start - rect.top, 0),
+    end
+  );
+
+  const percent = (progress / end) * 100;
+  progressLine.style.height = `${percent}%`;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   TIMELINE SCROLL REVEAL
+================================ */
+const timelineItems = document.querySelectorAll(".timeline-item");
+
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+timelineItems.forEach(item => revealObserver.observe(item));
+
+/* ===============================
+   AUTO TIMELINE STATE BY DATE
+================================ */
+const now = new Date();
+const month = now.getMonth() + 1; // Jan = 1
+
+const timelineStates = [
+  { id: "dec-jan", start: 12, end: 1 },
+  { id: "feb-mar", start: 2, end: 3 },
+  { id: "april", start: 4, end: 4 }
+];
+
+document.querySelectorAll(".timeline-item").forEach(item => {
+  item.classList.remove("completed", "active", "upcoming");
+});
+
+document.querySelectorAll(".timeline-item").forEach((item, index) => {
+  if (month <= 1) {
+    item.classList.add(index === 0 ? "active" : "upcoming");
+  } else if (month <= 3) {
+    item.classList.add(index < 1 ? "completed" : index === 1 ? "active" : "upcoming");
+  } else {
+    item.classList.add(index < 2 ? "completed" : "active");
+  }
+});
