@@ -4,23 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HackRoot — Team</title>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">HackRoot</a>
-      <nav class="nav">
-        <a href="#home">Hello</a>
-        <a href="#team">Team</a>
-        <a href="#projects">Projects</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#contact" class="btn-outline">Join</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-    </div>
-  </header>
+
+  <!-- edit nav ---by Prateek 
+
+ <header class="site-header">
+  <div class="container header-inner">
+
+    <!-- BRAND -->
+    <a class="brand premium-brand" href="#home">
+  <span class="brand-main">hack</span><span class="brand-accent">Root</span>
+</a>
+
+
+    <!-- NAV -->
+    <nav class="nav" id="mainNav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#timeline" class="nav-link">Timeline</a>
+      <a href="#contact" class="nav-link nav-cta">Join</a>
+    </nav>
+
+    <!-- TOGGLE -->
+    <button class="nav-toggle" id="navToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+  </div>
+</header>
+
+<div id="navBackdrop" class="nav-backdrop"></div>
+
 
   <main>
     <!-- HERO -->
@@ -136,31 +159,138 @@
       </div>
     </section>
 
+    <!-- /* --------------------------Lakshya-section-Start------------------ */ -->
+
     <!-- Timeline -->
-    <section id="timeline" class="section">
-      <div class="container">
-        <h2>Timeline & Milestones</h2>
-        <div class="timeline">
-          <div class="step"><strong>Dec–Jan</strong><span>Learning Phase: Python, ML, HTML/CSS/JS, SQL, React basics.</span></div>
-          <div class="step"><strong>Feb–Mar</strong><span>Dummy projects: chatbot, URL scanner, AI text classifier.</span></div>
-          <div class="step"><strong>April</strong><span>Hackathon: finalize project, polish, deploy & present.</span></div>
+   <section id="timeline" class="section timeline-section">
+ <section class="timeline-heading">
+  <span class="timeline-eyebrow">OUR JOURNEY</span>
+
+  <h2 class="timeline-title">
+    Timeline <span>&</span> Milestones
+  </h2>
+
+ 
+
+  <p class="timeline-subtitle">
+    Our journey from learning foundations to real-world hackathon execution.
+  </p>
+</section>
+
+    <div class="timeline-wrap">
+
+      <!-- PROGRESS LINE (REQUIRED) -->
+      <div class="timeline-progress" id="timelineProgress"></div>
+
+      <!-- ITEM 1 -->
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <h3>Dec – Jan</h3>
+          <p>Learning Phase: Python, ML, HTML/CSS/JS, SQL, React basics.</p>
+          <span class="timeline-tag">Learning</span>
         </div>
       </div>
-    </section>
+
+      <!-- ITEM 2 -->
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <h3>Feb – Mar</h3>
+          <p>Dummy projects: chatbot, URL scanner, AI classifier.</p>
+          <span class="timeline-tag">Building</span>
+        </div>
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card highlight">
+          <h3>April</h3>
+          <p>Hackathon: finalize project, deploy & present.</p>
+          <span class="timeline-tag glow">Hackathon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- /* --------------------------Lakshya-section-end------------------ */ -->
+
+
+    <!-- <form id="joinForm" class="premium-form" action="http://127.0.0.1:5000/submit" method="POST"> -->
 
     <!-- Contact -->
-    <section id="contact" class="section alt">
-      <div class="container contact-inner">
-        <h2>Join / Contact</h2>
-        <form id="joinForm" class="contact-form" action="http://127.0.0.1:5000/submit" method="POST">
-          <input name="name" placeholder="Your name" required />
-          <input name="email" type="email" placeholder="Email" required />
-          <input name="github" placeholder="GitHub / LinkedIn (optional)" />
-          <textarea name="message" rows="4" placeholder="How you'd like to help"></textarea>
-          <button class="btn-primary" type="submit">Send</button>
+    <section id="contact" class="section contact-fullwidth">
+  <div class="contact-fullwidth-bg">
+    <div class="container contact-form-wrap">
+      <div class="form-panel">
+        <div class="panel-head">
+          <h2>Join / Contact</h2>
+          <p class="muted">Tell us how you'd like to help — one message, long-term impact.</p>
+        </div>
+
+        <form id="joinForm" class="premium-form"  action="http://127.0.0.1:5000/submit" method="POST" novalidate>
+          <div class="row">
+            <div class="field">
+              <input name="name" type="text" id="name" placeholder=" " required aria-label="Your name" />
+              <label for="name">Your Name</label>
+            </div>
+
+            <div class="field">
+              <input name="email" type="email" id="email" placeholder=" " required aria-label="Email address" />
+              <label for="email">Email Address</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field phone-field">
+              <span class="country" aria-hidden="true">+91</span>
+              <input name="phone" type="tel" id="phone" inputmode="numeric" pattern="[0-9]*" placeholder=" " maxlength="10" required aria-label="Mobile number" />
+              <label for="phone">Mobile Number</label>
+            </div>
+
+            <div class="field">
+              <input name="github" type="text" id="github" placeholder=" " aria-label="GitHub or LinkedIn (optional)" />
+              <label for="github">GitHub / LinkedIn (optional)</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <textarea name="message" id="message" rows="5" placeholder=" " required aria-label="How you'd like to help"></textarea>
+            <label for="message">How you'd like to help</label>
+          </div>
+
+          <div class="form-controls">
+            <button type="submit" class="submit-btn" aria-live="polite">
+              <span class="btn-inner">
+                <svg class="icon-send" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+                <span class="btn-text">Send Message</span>
+              </span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+
+            <div class="status-msg" aria-hidden="true"></div>
+          </div>
         </form>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- success modal (hidden) -->
+  <div id="successModal" class="success-modal" role="status" aria-hidden="true">
+    <div class="success-card">
+      <div class="checkmark">
+        <svg viewBox="0 0 52 52"><path d="M14 27 L22 34 L38 16" /></svg>
+      </div>
+      <h3>Thanks — message received</h3>
+      <p>We'll get back to you soon. Welcome to HackRoot.</p>
+      <button id="closeSuccess" class="btn-ghost">Close</button>
+    </div>
+  </div>
+</section>
+
   </main>
 
   <footer class="site-footer">
@@ -170,7 +300,19 @@
     </div>
   </footer>
 
+<!-- GIF SUCCESS POPUP -->
 
-  <script src="Js/script.js"></script>
+  
+  <div id="gifPopup" class="gif-popup" aria-hidden="true">
+    <div class="gif-panel" id="gifPanel">
+      <img src="Assets/Success.gif" class="gif-tick" alt="Success" />
+      <h3 id="gifTitle">Message Sent!</h3>
+      <p id="gifMessage">We'll get back to you soon.</p>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+
 </body>
-</html>
+</html> 
+
