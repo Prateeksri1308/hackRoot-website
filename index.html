@@ -1,176 +1,150 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HackRoot — Team</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HackRoot — Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="CSS/style.css" />
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
 </head>
+
+<!-- navbar herosection  krishna  -->
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">HackRoot</a>
-      <nav class="nav">
-        <a href="#home">Home</a>
-        <a href="#team">Team</a>
-        <a href="#projects">Projects</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#contact" class="btn-outline">Join</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <div class="ambient-glow">
+        <div class="glow" style="top: -10%; right: -5%; background: var(--primary-blue)"></div>
+        <div class="glow" style="bottom: -10%; left: -5%; background: var(--accent-cyan)"></div>
     </div>
-  </header>
 
-  <main>
-    <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <h1><span><span class="h">𝐡</span>ack<span class="R">𝐑</span>oot</span>  — Build. Learn. Win.</h1>
-          <p class="lead">A focused hackathon team building AI-first, production-ready projects.</p>
-          <div class="hero-ctas">
-            <a href="#team" class="btn-primary">Meet the Team</a>
-            <a href="#projects" class="btn-ghost">See Projects</a>
-          </div>
+    <nav class="navbar">
+        <a href="#" class="nav-logo">hack<span>R</span>oot</a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="team-section">Team</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Timeline</a></li>
+            <li><a href="#" class="btn-join">Join Now</a></li>
+        </ul>
+
+        <div class="menu-btn" id="menuBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
-        <div class="hero-media">
-         <!--  <div class="project-preview">
-            <h4>Project Idea: AI Fake News & Scam Detector</h4>
-            <p>ML classification + GenAI explanation engine — Flask backend + React dashboard.</p>
-          </div> -->
+    </nav>
+    <main class="hero">
+        <h1 class="brand-title"><span class="h-gradient">h</span>ackRoot</h1>
+        <div class="tagline-row">
+            <div class="hr-line"></div>
+            <h2 class="tagline">Build. Learn. Win.</h2>
+            <div class="hr-line"></div>
         </div>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section id="team" class="section">
-      <div class="container">
-        <h2>Team HackRoot</h2>
-        <p class="muted">Roles & responsibilities (from our team plan)</p>
-        <div class="grid team-grid">
-          <!-- card: Prateek (AI/ML + Backend Lead) -->
-          <article class="card">
-            <img src="images/prateek.jpg" alt="Prateek" class="avatar"/>
-            <h3>Prateek</h3>
-            <p class="role">AI/ML Engineer + Backend Lead</p>
-            <ul>
-              <li>Build ML & AI models</li>
-              <li>Flask backend APIs & deployment</li>
-              <li>GenAI integrations & prompt engineering</li>
-            </ul>
-            <button class="btn-link" data-person="prateek">More</button>
-          </article>
-
-          <!-- card: Suchi -->
-          <article class="card">
-            <img src="images/suchi.jpg" alt="Suchi" class="avatar"/>
-            <h3>Suchi</h3>
-            <p class="role">Frontend Lead</p>
-            <ul>
-              <li>UI/UX & responsive layouts</li>
-              <li>Frontend API integration</li>
-              <li>Visual consistency & design</li>
-            </ul>
-            <button class="btn-link" data-person="suchi">More</button>
-          </article>
-
-          <!-- card: Krishna -->
-          <article class="card">
-            <img src="images/krishna.jpg" alt="Krishna" class="avatar"/>
-            <h3>Krishna</h3>
-            <p class="role">Database Engineer + Backend Support</p>
-            <ul>
-              <li>SQL schema & optimization</li>
-              <li>Database connectivity</li>
-              <li>Backend support & testing</li>
-            </ul>
-            <button class="btn-link" data-person="krishna">More</button>
-          </article>
-
-          <!-- card: Lakshya -->
-          <article class="card">
-            <img src="images/lakshya.jpg" alt="Lakshya" class="avatar"/>
-            <h3>Lakshya</h3>
-            <p class="role">MERN Developer</p>
-            <ul>
-              <li>React components & routing</li>
-              <li>Frontend-backend integration</li>
-              <li>Performance optimization</li>
-            </ul>
-            <button class="btn-link" data-person="lakshya">More</button>
-          </article>
-
-          <!-- card: Shivi -->
-          <article class="card">
-            <img src="images/shivi.jpg" alt="Shivi" class="avatar"/>
-            <h3>Shivi</h3>
-            <p class="role">Frontend Support + QA</p>
-            <ul>
-              <li>UI fixes & testing</li>
-              <li>Documentation & presentation</li>
-            </ul>
-            <button class="btn-link" data-person="shivi">More</button>
-          </article>
+        <p class="hero-desc">
+            A high-performance hackathon team building
+            <strong>AI-first</strong> production-ready projects.
+        </p>
+        <div class="btn-group">
+            <a href="#" class="btn btn-main">Meet the Team</a>
+            <a href="#" class="btn btn-outline">See Projects</a>
         </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- Projects -->
-    <section id="projects" class="section alt">
-      <div class="container">
-        <h2>Projects</h2>
-        <div class="grid projects-grid">
-          <article class="project-card">
-            <h3>AI Fake News & Scam Detection</h3>
-            <p>ML classifier + GenAI explanation, URL scanner, Flask backend, React dashboard.</p>
-            <a class="btn-ghost" href="#">Read Brief</a>
-          </article>
+    <!-- TEAM  section -->
 
-          <article class="project-card">
-            <h3>Healthcare Medical Report Summarizer</h3>
-            <p>GenAI summarization, risk analysis, secure backend for patient data.</p>
-            <a class="btn-ghost" href="#">Read Brief</a>
-          </article>
+    <section class="team-section">
+        <div class="team-header">
+            <h2>Team HackRoot</h2>
+            <p>People behind the product — building with precision & purpose.</p>
         </div>
-      </div>
+
+        <div class="team-grid">
+
+            <!-- CARD -->
+            <div class="team-card">
+                <img src="https://i.pravatar.cc/300?img=1" alt="Prateek">
+                <h3>Prateek</h3>
+                <span>AI / ML Engineer</span>
+                <p>Designs intelligent systems, ML models & scalable AI APIs.</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pravatar.cc/300?img=2" alt="Suchi">
+                <h3>Suchi</h3>
+                <span>Frontend Lead</span>
+                <p>Crafts clean UI, pixel-perfect layouts & frontend logic.</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pravatar.cc/300?img=3" alt="Krishna">
+                <h3>Krishna</h3>
+                <span>Database Engineer</span>
+                <p>Optimizes database design, performance & backend support.</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pravatar.cc/300?img=4" alt="Lakshya">
+                <h3>Lakshya</h3>
+                <span>MERN Developer</span>
+                <p>Builds robust React systems with seamless backend integration.</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pravatar.cc/300?img=5" alt="Shivi">
+                <h3>Shivi</h3>
+                <span>QA & Support</span>
+                <p>Ensures UI quality, documentation & testing standards.</p>
+            </div>
+        </div>
     </section>
 
     <!-- Timeline -->
+
     <section id="timeline" class="section">
-      <div class="container">
-        <h2>Timeline & Milestones</h2>
-        <div class="timeline">
-          <div class="step"><strong>Dec–Jan</strong><span>Learning Phase: Python, ML, HTML/CSS/JS, SQL, React basics.</span></div>
-          <div class="step"><strong>Feb–Mar</strong><span>Dummy projects: chatbot, URL scanner, AI text classifier.</span></div>
-          <div class="step"><strong>April</strong><span>Hackathon: finalize project, polish, deploy & present.</span></div>
+        <div class="container">
+            <h2>Timeline & Milestones</h2>
+            <div class="timeline">
+                <div class="step">
+                    <strong>Dec–Jan</strong><span>Learning Phase: Python, ML, HTML/CSS/JS, SQL, React
+                        basics.</span>
+                </div>
+                <div class="step">
+                    <strong>Feb–Mar</strong><span>Dummy projects: chatbot, URL scanner, AI text classifier.</span>
+                </div>
+                <div class="step">
+                    <strong>April</strong><span>Hackathon: finalize project, polish, deploy & present.</span>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="section alt">
-      <div class="container contact-inner">
-        <h2>Join / Contact</h2>
-        <form id="joinForm" class="contact-form" action="http://127.0.0.1:5000/submit" method="POST">
-          <input name="name" placeholder="Your name" required />
-          <input name="email" type="email" placeholder="Email" required />
-          <input name="github" placeholder="GitHub / LinkedIn (optional)" />
-          <textarea name="message" rows="4" placeholder="How you'd like to help"></textarea>
-          <button class="btn-primary" type="submit">Send</button>
-        </form>
-      </div>
+        <div class="container contact-inner">
+            <h2>Join / Contact</h2>
+            <form id="joinForm" class="contact-form" action="http://127.0.0.1:5000/submit" method="POST">
+                <input name="name" placeholder="Your name" required />
+                <input name="email" type="email" placeholder="Email" required />
+                <input name="github" placeholder="GitHub / LinkedIn (optional)" />
+                <textarea name="message" rows="4" placeholder="How you'd like to help"></textarea>
+                <button class="btn-primary" type="submit">Send</button>
+            </form>
+        </div>
     </section>
-  </main>
+    </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>HackRoot — Follow our journey on <a href="#">GitHub</a></p>
-      <small>Meeting cadence: Weekly check-ins (Dec–Jan) → 2x/week (Feb–Mar) → Daily (April).</small>
-    </div>
-  </footer>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>HackRoot — Follow our journey on <a href="#">GitHub</a></p>
+            <small>Meeting cadence: Weekly check-ins (Dec–Jan) → 2x/week (Feb–Mar) →
+                Daily (April).</small>
+        </div>
+    </footer>
 
-
-  <script src="Js/script.js"></script>
+    <script src="Js/script.js"></script>
 </body>
+
 </html>
