@@ -403,12 +403,60 @@ window.addEventListener("load", () => {
   document.querySelector(".site-header").classList.add("loaded");
 });
 
+// -----------Timeline-section------------
+let lastScrollY = window.scrollY;
+let scrollDirection = "down";
+
+window.addEventListener("scroll", () => {
+  scrollDirection = window.scrollY > lastScrollY ? "down" : "up";
+  lastScrollY = window.scrollY;
+});
 
 
+const timelineItems = document.querySelectorAll(".timeline-item");
+let currentActiveIndex = -1;
 
 
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const item = entry.target;
+      const index = [...timelineItems].indexOf(item);
+      const dot = item.querySelector(".node-dot");
+
+      // Decide if we should activate based on scroll direction
+      if (
+        (scrollDirection === "down" && index <= currentActiveIndex) ||
+        (scrollDirection === "up" && index >= currentActiveIndex)
+      ) {
+        return;
+      }
+
+      currentActiveIndex = index;
+
+      // Reset all states
+      timelineItems.forEach((el, i) => {
+        el.classList.remove("active", "completed");
+        el.querySelector(".node-dot")?.classList.remove("blink");
+
+        // Mark completed dynamically
+        if (i < index) el.classList.add("completed");
+      });
+
+      // Activate current
+      item.classList.add("active");
+      dot?.classList.add("blink");
+    });
+  },
+  {
+    threshold: 0.55,
+  }
+);
 
 
+timelineItems.forEach(item => observer.observe(item));
 
 
 
@@ -420,88 +468,15 @@ const timelineWrap = document.querySelector(".timeline-wrap");
 const progressLine = document.getElementById("timelineProgress");
 
 window.addEventListener("scroll", () => {
-  if (!timelineWrap || !progressLine) return;
-
   const rect = timelineWrap.getBoundingClientRect();
   const viewHeight = window.innerHeight;
 
-  // start filling when timeline enters viewport
-  const start = viewHeight * 0.2;
-  const end = rect.height + start;
-
-  const progress = Math.min(
-    Math.max(start - rect.top, 0),
-    end
+  const total = rect.height - viewHeight * 0.3;
+  const passed = Math.min(
+    Math.max(viewHeight * 0.7 - rect.top, 0),
+    total
   );
 
-  const percent = (progress / end) * 100;
-  progressLine.style.height = `${percent}%`;
+  const percent = Math.max(0, Math.min((passed / total) * 100, 100));
+  progressLine.style.height = percent + "%";
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===============================
-   TIMELINE SCROLL REVEAL
-================================ */
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-const revealObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("reveal");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-timelineItems.forEach(item => revealObserver.observe(item));
-
-/* ===============================
-   AUTO TIMELINE STATE (YEAR SAFE)
-================================ */
-const now = new Date();
-const m = now.getMonth(); // 0–11
-
-const items = document.querySelectorAll(".timeline-item");
-
-// reset
-items.forEach(i =>
-  i.classList.remove("completed", "active", "upcoming")
-);
-
-// Dec–Jan
-if (m === 11 || m === 0) {
-  items[0]?.classList.add("active");
-  items[1]?.classList.add("upcoming");
-  items[2]?.classList.add("upcoming");
-}
-
-// Feb–Mar
-else if (m === 1 || m === 2) {
-  items[0]?.classList.add("completed");
-  items[1]?.classList.add("active");
-  items[2]?.classList.add("upcoming");
-}
-
-// April+
-else {
-  items[0]?.classList.add("completed");
-  items[1]?.classList.add("completed");
-  items[2]?.classList.add("active");
-}
