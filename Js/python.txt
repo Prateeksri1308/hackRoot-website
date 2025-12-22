@@ -476,3 +476,40 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+ and .env
+
+
+
+
+
+
+
+
+ # ===============================
+# Flask Security
+# ===============================
+FLASK_SECRET_KEY=9e0475d9ac993e2795526f13809cce1e361e7602c4f3a85250ab0308438a985f
+
+
+# ===============================
+# SMTP CONFIG (SYSTEM ONLY)
+# ===============================
+SMTP_HOST=smtp.zoho.in
+SMTP_PORT=587
+SMTP_USER=no-reply@hackroot.in
+SMTP_PASS=sEnpqUd0awUy
+
+
+# ===============================
+# EMAIL ROLES (OPTION A)
+# ===============================
+
+# Automated system sender (SEND ONLY)
+SYSTEM_SENDER_EMAIL=no-reply@hackroot.in
+
+# Human inbox (RECEIVE + MANUAL REPLY ONLY)
+SUPPORT_EMAIL=support@hackroot.in

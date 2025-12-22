@@ -473,27 +473,35 @@ const revealObserver = new IntersectionObserver(
 timelineItems.forEach(item => revealObserver.observe(item));
 
 /* ===============================
-   AUTO TIMELINE STATE BY DATE
+   AUTO TIMELINE STATE (YEAR SAFE)
 ================================ */
 const now = new Date();
-const month = now.getMonth() + 1; // Jan = 1
+const m = now.getMonth(); // 0–11
 
-const timelineStates = [
-  { id: "dec-jan", start: 12, end: 1 },
-  { id: "feb-mar", start: 2, end: 3 },
-  { id: "april", start: 4, end: 4 }
-];
+const items = document.querySelectorAll(".timeline-item");
 
-document.querySelectorAll(".timeline-item").forEach(item => {
-  item.classList.remove("completed", "active", "upcoming");
-});
+// reset
+items.forEach(i =>
+  i.classList.remove("completed", "active", "upcoming")
+);
 
-document.querySelectorAll(".timeline-item").forEach((item, index) => {
-  if (month <= 1) {
-    item.classList.add(index === 0 ? "active" : "upcoming");
-  } else if (month <= 3) {
-    item.classList.add(index < 1 ? "completed" : index === 1 ? "active" : "upcoming");
-  } else {
-    item.classList.add(index < 2 ? "completed" : "active");
-  }
-});
+// Dec–Jan
+if (m === 11 || m === 0) {
+  items[0]?.classList.add("active");
+  items[1]?.classList.add("upcoming");
+  items[2]?.classList.add("upcoming");
+}
+
+// Feb–Mar
+else if (m === 1 || m === 2) {
+  items[0]?.classList.add("completed");
+  items[1]?.classList.add("active");
+  items[2]?.classList.add("upcoming");
+}
+
+// April+
+else {
+  items[0]?.classList.add("completed");
+  items[1]?.classList.add("completed");
+  items[2]?.classList.add("active");
+}
