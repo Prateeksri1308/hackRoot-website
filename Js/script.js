@@ -581,8 +581,8 @@ const TEAM_DATA = {
       "Backend & GenAI integration",
       "Deployment & scaling"
     ],
-    github: "https://github.com/yourid",
-    linkedin: "https://linkedin.com/in/yourid"
+    github: "https://github.com/prateeksri1308/",
+    linkedin: "https://www.linkedin.com/in/prateek-srivastava-backend/"
   },
 
   suchi: {
@@ -596,8 +596,8 @@ const TEAM_DATA = {
       "Frontend integration",
       "Polish & responsiveness"
     ],
-    github: "#",
-    linkedin: "#"
+    github: "https://github.com/suchig9434/",
+    linkedin: "https://www.linkedin.com/in/suchi-g-b13a4b333/"
   },
 
   krishna: {
@@ -612,7 +612,7 @@ const TEAM_DATA = {
       "Data validation"
     ],
     github: "https://github.com/codewithkrishna09/",
-    linkedin: "#"
+    linkedin: "https://www.linkedin.com/in/krishna-jaiswal-177a86399/"
   },
 
   lakshya: {
@@ -626,8 +626,8 @@ const TEAM_DATA = {
       "API integration",
       "Performance tuning"
     ],
-    github: "#",
-    linkedin: "#"
+    github: "https://github.com/lakshyajaiswal123/",
+    linkedin: "https://www.linkedin.com/in/lakshya-jaiswal-356106385/"
   },
 
   shivi: {
@@ -641,8 +641,8 @@ const TEAM_DATA = {
       "Bug fixing",
       "Documentation"
     ],
-    github: "#",
-    linkedin: "#"
+    github: "https://github.com/shivigoel9/",
+    linkedin: "https://www.linkedin.com/in/shivi-goel-604845327/"
   }
 };
 
