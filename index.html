@@ -29,7 +29,7 @@
       <a href="#team" class="nav-link">Team</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#timeline" class="nav-link">Timeline</a>
-      <a href="#contact" class="nav-link nav-cta">Join</a>
+      <a href="#contact" class="nav-link ">Join</a>
     </nav>
 
     <!-- TOGGLE -->
@@ -47,97 +47,198 @@
 
   <main>
     <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <h1><span><span class="h">𝐡</span>ack<span class="R">𝐑</span>oot</span>  — Build. Learn. Win.</h1>
-          <p class="lead">A focused hackathon team building AI-first, production-ready projects.</p>
-          <div class="hero-ctas">
-            <a href="#team" class="btn-primary">Meet the Team</a>
-            <a href="#projects" class="btn-ghost">See Projects</a>
-          </div>
-        </div>
-        <div class="hero-media">
-         <!--  <div class="project-preview">
-            <h4>Project Idea: AI Fake News & Scam Detector</h4>
-            <p>ML classification + GenAI explanation engine — Flask backend + React dashboard.</p>
-          </div> -->
-        </div>
+    <section id="home" class="hero-premium">
+  <div class="hero-bg"></div>
+
+  <div class="container hero-inner">
+
+    <div class="hero-copy">
+      <span class="hero-eyebrow">AI • SYSTEMS • EXECUTION</span>
+
+      <h1 class="hero-title">
+        hack<span class="accent">Root</span><br>
+        <span class="hero-subline">Build. Learn. Win.</span>
+      </h1>
+
+      <p class="hero-desc">
+        A focused hackathon team engineering AI-first,
+        production-ready systems — not demos.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#team" class="btn-primary">Meet the Team</a>
+        <a href="#projects" class="btn-ghost">View Projects</a>
       </div>
-    </section>
+    </div>
+
+    <!-- Right visual (abstract, not heavy) -->
+    <div class="hero-visual">
+      <div class="hero-orb"></div>
+      <div class="hero-grid"></div>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- TEAM -->
-    <section id="team" class="section">
-      <div class="container">
-        <h2>Team HackRoot</h2>
-        <p class="muted">Roles & responsibilities (from our team plan)</p>
-        <div class="grid team-grid">
-          <!-- card: Prateek (AI/ML + Backend Lead) -->
-          <article class="card">
-            <img src="images/prateek.jpg" alt="Prateek" class="avatar"/>
-            <h3>Prateek</h3>
-            <p class="role">AI/ML Engineer + Backend Lead</p>
-            <ul>
-              <li>Build ML & AI models</li>
-              <li>Flask backend APIs & deployment</li>
-              <li>GenAI integrations & prompt engineering</li>
-            </ul>
-            <button class="btn-link" data-person="prateek">More</button>
-          </article>
+   <section id="team" class="section team-premium">
+  <div class="container">
 
-          <!-- card: Suchi -->
-          <article class="card">
-            <img src="images/suchi.jpg" alt="Suchi" class="avatar"/>
-            <h3>Suchi</h3>
-            <p class="role">Frontend Lead</p>
-            <ul>
-              <li>UI/UX & responsive layouts</li>
-              <li>Frontend API integration</li>
-              <li>Visual consistency & design</li>
-            </ul>
-            <button class="btn-link" data-person="suchi">More</button>
-          </article>
+    <!-- HEADER -->
+    <div class="team-head">
+      <span class="team-eyebrow">CORE TEAM</span>
+      <h2 class="team-title">Team hackRoot</h2>
+      <p class="team-subtitle">
+        Roles, responsibilities, and execution ownership
+        across our hackathon projects.
+      </p>
+    </div>
 
-          <!-- card: Krishna -->
-          <article class="card">
-            <img src="images/krishna.jpg" alt="Krishna" class="avatar"/>
-            <h3>Krishna</h3>
-            <p class="role">Database Engineer + Backend Support</p>
-            <ul>
-              <li>SQL schema & optimization</li>
-              <li>Database connectivity</li>
-              <li>Backend support & testing</li>
-            </ul>
-            <button class="btn-link" data-person="krishna">More</button>
-          </article>
+    <!-- GRID -->
+    <div class="team-grid-premium">
 
-          <!-- card: Lakshya -->
-          <article class="card">
-            <img src="images/lakshya.jpg" alt="Lakshya" class="avatar"/>
-            <h3>Lakshya</h3>
-            <p class="role">MERN Developer</p>
-            <ul>
-              <li>React components & routing</li>
-              <li>Frontend-backend integration</li>
-              <li>Performance optimization</li>
-            </ul>
-            <button class="btn-link" data-person="lakshya">More</button>
-          </article>
+      <!-- Prateek -->
+      <article class="team-card lead" data-member="prateek">
+        <div class="team-avatar">
+          <img src="Assets/my pic.jpg" alt="Prateek">
+          <span class="team-badge">Lead</span>
 
-          <!-- card: Shivi -->
-          <article class="card">
-            <img src="images/shivi.jpg" alt="Shivi" class="avatar"/>
-            <h3>Shivi</h3>
-            <p class="role">Frontend Support + QA</p>
-            <ul>
-              <li>UI fixes & testing</li>
-              <li>Documentation & presentation</li>
-            </ul>
-            <button class="btn-link" data-person="shivi">More</button>
-          </article>
+          <div class="team-social">
+            <a href="https://www.linkedin.com/in/prateek-srivastava-backend/" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/prateeksri1308/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </div>
         </div>
-      </div>
-    </section>
+
+        <div class="team-body">
+          <h3>Prateek</h3>
+          <p class="team-role">AI/ML Engineer · Backend Lead</p>
+
+          <div class="team-projects">
+            <span>AI Fake News</span>
+            <span>Healthcare AI</span>
+          </div>
+
+          <button class="team-toggle">
+            <span>View Profile</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Suchi -->
+      <article class="team-card" data-member="suchi">
+        <div class="team-avatar">
+          <img src="Assets/suchi.jpeg" alt="Suchi">
+
+          <div class="team-social">
+            <a href="https://github.com/suchig9434/" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/suchi-g-b13a4b333/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="team-body">
+          <h3>Suchi</h3>
+          <p class="team-role">Frontend Lead</p>
+
+          <div class="team-projects">
+            <span>UI / UX</span>
+            <span>Responsive</span>
+          </div>
+
+          <button class="team-toggle">
+            <span>View Profile</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Krishna -->
+      <article class="team-card" data-member="krishna">
+        <div class="team-avatar">
+          <img src="Assets/krishna.jpeg" alt="Krishna">
+
+          <div class="team-social">
+            <a href="https://github.com/codewithkrishna09/" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="team-body">
+          <h3>Krishna</h3>
+          <p class="team-role">Database Engineer</p>
+
+          <div class="team-projects">
+            <span>SQL</span>
+            <span>Optimization</span>
+          </div>
+
+          <button class="team-toggle">
+            <span>View Profile</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Lakshya -->
+      <article class="team-card" data-member="lakshya">
+        <div class="team-avatar">
+          <img src="Assets/lakshya.jpg" alt="Lakshya">
+
+          <div class="team-social">
+            <a href="https://github.com/lakshyajaiswal123/" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/lakshya-jaiswal-356106385/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="team-body">
+          <h3>Lakshya</h3>
+          <p class="team-role">MERN Developer</p>
+
+          <div class="team-projects">
+            <span>React</span>
+            <span>Node</span>
+          </div>
+
+          <button class="team-toggle">
+            <span>View Profile</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Shivi -->
+      <article class="team-card" data-member="shivi">
+        <div class="team-avatar">
+          <img src="Assets/shivi.jpeg" alt="Shivi">
+
+          <div class="team-social">
+            <a href="https://github.com/shivigoel9/" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shivi-goel-604845327/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="team-body">
+          <h3>Shivi</h3>
+          <p class="team-role">Frontend Support · QA</p>
+
+          <div class="team-projects">
+            <span>Testing</span>
+            <span>Docs</span>
+          </div>
+
+          <button class="team-toggle">
+            <span>View Profile</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
 
     <!-- Projects -->
     <section id="projects" class="section alt">
@@ -298,6 +399,40 @@
       <p id="gifMessage">We'll get back to you soon.</p>
     </div>
   </div>
+
+  <!-- TEAM QUICK VIEW -->
+<div id="teamQuickView" class="quickview-overlay">
+
+  <div class="quickview-card skeleton">
+
+    <button class="quickview-close">&times;</button>
+
+    <!-- IMAGE -->
+    <div class="quickview-media">
+      <img id="qvAvatar" src="" alt="Member" />
+    </div>
+
+    <!-- CONTENT -->
+    <div class="quickview-content">
+      <span class="qv-category">TEAM MEMBER</span>
+
+      <h2 id="qvName"></h2>
+      <p id="qvRole" class="qv-role"></p>
+
+      <p id="qvDesc" class="qv-desc"></p>
+
+      <div id="qvProjects" class="qv-tags"></div>
+
+      <ul id="qvTimeline" class="qv-timeline"></ul>
+
+      <div class="qv-actions">
+        <a id="qvGithub" target="_blank" class="btn-primary">GitHub</a>
+        <a id="qvLinkedin" target="_blank" class="btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <script src="Js/script.js"></script>
 

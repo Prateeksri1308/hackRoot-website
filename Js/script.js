@@ -323,45 +323,82 @@ setTimeout(() => {
 const header = document.querySelector(".site-header");
 const nav = document.getElementById("mainNav");
 const toggle = document.getElementById("navToggle");
-const icon = toggle.querySelector("i");
-const links = document.querySelectorAll(".nav-link");
+const backdrop = document.getElementById("navBackdrop");
 
-/* toggle menu */
+/* toggle */
 toggle.addEventListener("click", () => {
   const open = nav.classList.toggle("open");
   toggle.classList.toggle("open", open);
+  backdrop.classList.toggle("show", open);
   toggle.setAttribute("aria-expanded", open);
-
-  icon.classList.toggle("fa-bars", !open);
-  icon.classList.toggle("fa-xmark", open);
 });
 
-/* close on link click */
-links.forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-    toggle.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-    icon.classList.add("fa-bars");
-    icon.classList.remove("fa-xmark");
-  });
+/* close on backdrop */
+backdrop.addEventListener("click", closeNav);
+
+/* close on link */
+document.querySelectorAll(".nav-link").forEach(link =>
+  link.addEventListener("click", closeNav)
+);
+
+function closeNav() {
+  nav.classList.remove("open");
+  toggle.classList.remove("open");
+  backdrop.classList.remove("show");
+  toggle.setAttribute("aria-expanded", "false");
+}
+function lockScroll(lock) {
+  document.body.style.overflow = lock ? "hidden" : "";
+}
+
+toggle.addEventListener("click", () => {
+  const open = nav.classList.contains("open");
+  lockScroll(open);
 });
 
-/* active section + scroll effect */
-const sections = [...links].map(l => document.querySelector(l.getAttribute("href")));
+function closeNav() {
+  nav.classList.remove("open");
+  toggle.classList.remove("open");
+  backdrop.classList.remove("show");
+  toggle.setAttribute("aria-expanded", "false");
+  lockScroll(false);
+}
+/* ===============================
+   NAV ACTIVE LINK LOGIC (FIXED)
+================================ */
 
-window.addEventListener("scroll", () => {
-  header.classList.toggle("scrolled", window.scrollY > 20);
+const navLinks = document.querySelectorAll(".nav-link");
+const navSections = Array.from(navLinks)
+  .map(link => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+function updateActiveNav() {
+  const scrollPos = window.scrollY + 140;
 
-  const pos = window.scrollY + 120;
-  sections.forEach((sec, i) => {
-    if (!sec) return;
-    if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
-      links.forEach(l => l.classList.remove("active"));
-      links[i].classList.add("active");
+  navSections.forEach((section, index) => {
+    const top = section.offsetTop;
+    const height = section.offsetHeight;
+
+    if (scrollPos >= top && scrollPos < top + height) {
+      navLinks.forEach(l => l.classList.remove("active"));
+      navLinks[index].classList.add("active");
     }
   });
+}
+
+window.addEventListener("scroll", updateActiveNav);
+window.addEventListener("load", updateActiveNav);
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.forEach(l => l.classList.remove("active"));
+    link.classList.add("active");
+  });
 });
+
+/* header scroll */
+window.addEventListener("scroll", () => {
+  header.classList.toggle("scrolled", window.scrollY > 20);
+});
+
 /* LOGO SHRINK ON SCROLL */
 window.addEventListener("scroll", () => {
   document
@@ -505,3 +542,198 @@ else {
   items[1]?.classList.add("completed");
   items[2]?.classList.add("active");
 }
+// toogle - team section start
+
+
+/* ===============================
+   TEAM INTERACTIONS
+================================ */
+
+// toggle expand
+
+
+// auto highlight from project
+
+/* example hook:
+   highlightMember("fake-news")
+*/
+/* ===============================
+   TEAM QUICK VIEW LOGIC
+================================ */
+
+/* ===============================
+   TEAM QUICK VIEW (FINAL)
+================================ */
+
+/* ===============================
+   TEAM QUICK VIEW – CLEAN LOGIC
+================================ */
+
+const TEAM_DATA = {
+  prateek: {
+    name: "Prateek",
+    role: "AI/ML · Backend Lead",
+    avatar: "Assets/my pic.jpg",
+    desc: "Leads architecture, AI pipelines, backend APIs, and deployment.",
+    projects: ["AI Fake News", "Healthcare AI"],
+    timeline: [
+      "System architecture & model design",
+      "Backend & GenAI integration",
+      "Deployment & scaling"
+    ],
+    github: "https://github.com/yourid",
+    linkedin: "https://linkedin.com/in/yourid"
+  },
+
+  suchi: {
+    name: "Suchi",
+    role: "Frontend Lead",
+    avatar: "Assets/suchi.jpeg",
+    desc: "Owns UI/UX, responsive layouts, and frontend API integration.",
+    projects: ["UI / UX", "Responsive Design"],
+    timeline: [
+      "Design system",
+      "Frontend integration",
+      "Polish & responsiveness"
+    ],
+    github: "#",
+    linkedin: "#"
+  },
+
+  krishna: {
+    name: "Krishna",
+    role: "Database Engineer",
+    avatar: "Assets/krishna.jpeg",
+    desc: "Manages database schema, optimization, and backend data reliability.",
+    projects: ["SQL", "Optimization"],
+    timeline: [
+      "Schema design",
+      "Query optimization",
+      "Data validation"
+    ],
+    github: "https://github.com/codewithkrishna09/",
+    linkedin: "#"
+  },
+
+  lakshya: {
+    name: "Lakshya",
+    role: "MERN Developer",
+    avatar: "Assets/lakshya.jpg",
+    desc: "Builds React components and handles frontend-backend integration.",
+    projects: ["React", "Node"],
+    timeline: [
+      "Component development",
+      "API integration",
+      "Performance tuning"
+    ],
+    github: "#",
+    linkedin: "#"
+  },
+
+  shivi: {
+    name: "Shivi",
+    role: "Frontend Support · QA",
+    avatar: "Assets/shivi.jpeg",
+    desc: "Ensures UI stability, testing quality, and documentation.",
+    projects: ["Testing", "Docs"],
+    timeline: [
+      "UI testing",
+      "Bug fixing",
+      "Documentation"
+    ],
+    github: "#",
+    linkedin: "#"
+  }
+};
+
+const teamQuickView = document.getElementById("teamQuickView");
+
+/* OPEN */
+document.querySelectorAll(".team-toggle").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const key = btn.closest(".team-card").dataset.member;
+    openQuickView(key);
+  });
+});
+
+function openQuickView(key) {
+  teamQuickView.querySelector(".quickview-card")
+  .classList.remove("skeleton");
+
+  const d = TEAM_DATA[key];
+  if (!d) return;
+
+  qvAvatar.src = d.avatar;
+  qvName.textContent = d.name;
+  qvRole.textContent = d.role;
+  qvDesc.textContent = d.desc;
+
+  qvProjects.innerHTML = d.projects.map(p => `<span>${p}</span>`).join("");
+  qvTimeline.innerHTML = d.timeline.map(t => `<li>${t}</li>`).join("");
+
+  qvGithub.href = d.github;
+  qvLinkedin.href = d.linkedin;
+
+
+  teamQuickView.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+/* CLOSE */
+function closeQuickView() {
+  teamQuickView.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+document.querySelector(".quickview-close").onclick = closeQuickView;
+document.querySelector(".quickview-overlay").onclick = e => {
+  if (e.target.classList.contains("quickview-overlay")) closeQuickView();
+};
+
+/* ===============================
+   IMAGE PARALLAX (MOBILE)
+================================ */
+
+const qvContent = document.querySelector(".quickview-content");
+const qvImage = document.querySelector(".quickview-media img");
+
+if (qvContent && qvImage) {
+  qvContent.addEventListener("scroll", () => {
+    const y = qvContent.scrollTop;
+    qvImage.style.transform =
+      `translateY(${y * 0.18}px) scale(1.08)`;
+  });
+}
+/* ===============================
+   SWIPE DOWN TO CLOSE (MOBILE)
+================================ */
+
+let startY = 0;
+let currentY = 0;
+
+const sheet = document.querySelector(".quickview-card");
+
+sheet.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+});
+
+sheet.addEventListener("touchmove", e => {
+  currentY = e.touches[0].clientY;
+  const diff = currentY - startY;
+
+  if (diff > 0) {
+    sheet.style.transform = `translateY(${diff}px)`;
+  }
+});
+
+sheet.addEventListener("touchend", () => {
+  const diff = currentY - startY;
+
+  if (diff > 120) {
+    closeQuickView();
+  } else {
+    sheet.style.transform = "";
+  }
+
+  startY = currentY = 0;
+});
