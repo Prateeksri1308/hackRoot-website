@@ -5,6 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("joinForm");
   const ENDPOINT = "https://ct81fshw-5000.inc1.devtunnels.ms/submit";
 
+  let ticking = false;
+
+window.addEventListener("scroll", () => {
+  if (ticking) return;
+
+  ticking = true;
+  requestAnimationFrame(() => {
+    header.classList.toggle("scrolled", window.scrollY > 20);
+    updateActiveNav?.();
+    updateTimelineProgress?.();
+    ticking = false;
+  });
+});
+
   // core nodes
   const submitBtn = form?.querySelector(".submit-btn");
   const statusMsg =
@@ -317,6 +331,63 @@ setTimeout(() => {
     );
   }
 });
+// Step-by-step reveal
+document.addEventListener("DOMContentLoaded", () => {
+  const fields = document.querySelectorAll(".premium-form .field");
+  fields.forEach((field, i) => {
+    setTimeout(() => field.classList.add("reveal"), 120 * i);
+  });
+});
+
+// AI typing glow
+document.querySelectorAll('.premium-form input, .premium-form textarea')
+  .forEach(el => {
+    el.addEventListener('input', () => {
+      el.classList.add('is-typing');
+      clearTimeout(el._typingTimer);
+      el._typingTimer = setTimeout(() => {
+        el.classList.remove('is-typing');
+      }, 600);
+    });
+  });
+
+  // Inline validation
+document.querySelectorAll(".premium-form input, .premium-form textarea")
+  .forEach(input => {
+    input.addEventListener("blur", () => {
+      const field = input.closest(".field");
+      field.classList.remove("invalid", "valid");
+
+      if (!input.checkValidity()) {
+        field.classList.add("invalid");
+      } else {
+        field.classList.add("valid");
+      }
+    });
+  });
+const badge = document.querySelector(".verified-badge");
+document.getElementById("joinForm")
+  .addEventListener("input", e => {
+    if (e.target.form.checkValidity()) {
+      badge.classList.add("show");
+    }
+  });
+// toggle?.addEventListener("click", () => {
+//   const open = toggle.getAttribute("aria-expanded") === "true";
+//   toggle.setAttribute("aria-expanded", !open);
+//   principlesList.classList.toggle("open", !open);
+
+//   if (!open) {
+//     setTimeout(() => {
+//       document
+//         .querySelectorAll(".principles-list li:not(.reveal)")
+//         .forEach(li => principleObserver.observe(li));
+//     }, 120);
+//   }
+// });
+/* ===============================
+   NAVBAR JS (CLEAN & FINAL)
+================================ */
 /* ===============================
    NAVBAR JS (Font Awesome)
 ================================ */
@@ -348,8 +419,9 @@ function closeNav() {
   toggle.setAttribute("aria-expanded", "false");
 }
 function lockScroll(lock) {
-  document.body.style.overflow = lock ? "hidden" : "";
+  document.documentElement.style.overflow = lock ? "hidden" : "auto";
 }
+
 
 toggle.addEventListener("click", () => {
   const open = nav.classList.contains("open");
@@ -399,6 +471,7 @@ window.addEventListener("scroll", () => {
   header.classList.toggle("scrolled", window.scrollY > 20);
 });
 
+
 /* LOGO SHRINK ON SCROLL */
 window.addEventListener("scroll", () => {
   document
@@ -443,7 +516,25 @@ window.addEventListener("load", () => {
 
 
 
+/* ===============================
+   PRINCIPLES TOGGLE (CLEAN)
+================================ */
+const principlesToggle = document.querySelector(".principles-toggle");
+const principlesList = document.getElementById("principlesList");
 
+if (principlesToggle && principlesList) {
+  principlesToggle.addEventListener("click", () => {
+    const isOpen =
+      principlesToggle.getAttribute("aria-expanded") === "true";
+
+    principlesToggle.setAttribute(
+      "aria-expanded",
+      String(!isOpen)
+    );
+
+    principlesList.classList.toggle("open", !isOpen);
+  });
+}
 
 
 
@@ -480,71 +571,314 @@ window.addEventListener("scroll", () => {
 
 
 
+  const modal = document.getElementById("projectModal");
+  const panel = modal?.querySelector(".project-panel");
+  const overlay = modal?.querySelector(".project-overlay");
+  const closeBtn = modal?.querySelector(".project-close");
+
+  const titleEl = document.getElementById("ppTitle");
+  const taglineEl = document.getElementById("ppTagline");
+  const techEl = document.getElementById("ppTech");
+  const principlesEl = document.getElementById("ppPrinciples");
+  const statusEl = document.getElementById("ppStatus");
+  const githubBtn = document.getElementById("ppGithub");
+  const demoBtn = document.getElementById("ppDemo");
+const TEAM_MAP = {
+  prateek: { name: "Prateek", img: "Assets/my pic.jpg" },
+  suchi: { name: "Suchi", img: "Assets/suchi.jpeg" },
+  krishna: { name: "Krishna", img: "Assets/krishna.jpeg" },
+  lakshya: { name: "Lakshya", img: "Assets/lakshya.jpg" },
+  shivi: { name: "Shivi", img: "Assets/shivi.jpeg" }
+};
+
+  document.querySelectorAll(".project-click").forEach(card => {
+    card.addEventListener("click", () => openProject(card));
+  });
+
+  function openProject(card) {
+    
+    if (!modal || !panel) return;
+
+    const d = card.dataset;
+    
+/* OWNERS */
+/* ===============================
+   PP TEAM CONTRIBUTIONS
+================================ */
+
+const teamWrap = document.getElementById("ppOwners");
+teamWrap.innerHTML = "";
+
+if (d.owners) {
+  d.owners.split(",").forEach(entry => {
+    const [id, role] = entry.split("|");
+    const member = TEAM_MAP[id.trim()];
+
+    if (!member) return;
+
+    teamWrap.insertAdjacentHTML(
+      "beforeend",
+      `<div class="pp-team-item">
+        <div class="pp-team-avatar">
+          <img src="${member.img}" alt="${member.name}">
+        </div>
+        <div class="pp-team-info">
+          <strong>${member.name}</strong>
+          <span>${role?.trim() || ""}</span>
+        </div>
+      </div>`
+    );
+  });
+}
+
+/* ROADMAP */
+const roadmapWrap = document.getElementById("ppRoadmap");
+roadmapWrap.innerHTML = "";
+
+if (d.roadmap) {
+  d.roadmap.split(",").forEach(step => {
+    const [label, state] = step.split("|");
+
+    roadmapWrap.insertAdjacentHTML(
+      "beforeend",
+      `<div class="roadmap-item ${state}">
+        <span class="roadmap-dot"></span>
+        <span>${label.trim()}</span>
+      </div>`
+    );
+  });
+}
+
+// /* TEAM CONTRIBUTIONS */
+// const ownersWrap = document.getElementById("ppOwners");
+// ownersWrap.innerHTML = "";
+
+// if (d.owners) {
+//   d.owners.split(",").forEach(entry => {
+//     const [name, role] = entry.split("|");
+
+//     ownersWrap.insertAdjacentHTML(
+//       "beforeend",
+//       `<div class="contrib-item">
+//         <strong>${name.trim()}</strong>
+//         <span>${role?.trim() || ""}</span>
+//       </div>`
+//     );
+//   });
+// }
 
 
+document.querySelectorAll(".readiness-item").forEach(item => {
+  const bar = item.querySelector(".r-bar span");
+  if (!bar) return;
 
+  let percent = 40;
+  if (item.dataset.type === "model") percent = 60;
+  if (item.dataset.type === "data") percent = 45;
+  if (item.dataset.type === "infra") percent = 30;
 
+  bar.style.width = percent + "%";
+});
 
+    /* CONTENT */
+    titleEl.textContent = d.title || "Project";
+    taglineEl.textContent = d.desc || "";
 
+    /* STATUS */
+    const badge = card.querySelector(".launch-badge, .project-status");
+    if (badge) {
+      statusEl.textContent = badge.textContent;
+      statusEl.className = "pp-status " + badge.classList[1];
+    }
 
+    /* TECH */
+    techEl.innerHTML = "";
+    d.tech?.split(",").forEach(t =>
+      techEl.insertAdjacentHTML(
+        "beforeend",
+        `<span class="tag">${t.trim()}</span>`
+      )
+    );
 
+    /* PRINCIPLES */
+    principlesEl.innerHTML = "";
+    d.principles?.split(",").forEach(p =>
+      principlesEl.insertAdjacentHTML(
+        "beforeend",
+        `<span class="tag subtle">${p.trim()}</span>`
+      )
+    );
+
+    /* LINKS */
+    githubBtn.style.display = d.github ? "inline-flex" : "none";
+    demoBtn.style.display = d.demo ? "inline-flex" : "none";
+    if (d.github) githubBtn.href = d.github;
+    if (d.demo) demoBtn.href = d.demo;
+
+    /* SHOW PANEL */
+    modal.classList.add("show");
+    panel.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeProject() {
+    modal.classList.remove("show");
+    panel.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  closeBtn?.addEventListener("click", closeProject);
+  overlay?.addEventListener("click", closeProject);
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeProject();
+  });
 
 
 /* ===============================
-   TIMELINE SCROLL REVEAL
+   PRINCIPLES ICON SCROLL REVEAL
 ================================ */
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-const revealObserver = new IntersectionObserver(
+/* ===============================
+   PRINCIPLES ICON REVEAL
+================================ */
+window.principleObserver = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("reveal");
-        revealObserver.unobserve(entry.target);
+        window.principleObserver.unobserve(entry.target);
       }
     });
   },
-  { threshold: 0.2 }
+  { threshold: 0.25 }
 );
 
-timelineItems.forEach(item => revealObserver.observe(item));
+document
+  .querySelectorAll(".principles-list li")
+  .forEach(li => window.principleObserver.observe(li));
+
+
+
+
+
+
+
+
+
+
+// /* ===============================
+//    TIMELINE SCROLL REVEAL
+// ================================ */
+// const timelineItems = document.querySelectorAll(".timeline-item");
+
+// const revealObserver = new IntersectionObserver(
+//   entries => {
+//     entries.forEach(entry => {
+//       if (entry.isIntersecting) {
+//         entry.target.classList.add("reveal");
+//         revealObserver.unobserve(entry.target);
+//       }
+//     });
+//   },
+//   { threshold: 0.2 }
+// );
+
+// timelineItems.forEach(item => revealObserver.observe(item));
+
+// /* ===============================
+//    AUTO TIMELINE STATE (YEAR SAFE)
+// ================================ */
+// const now = new Date();
+// const m = now.getMonth(); // 0–11
+
+// const items = document.querySelectorAll(".timeline-item");
+
+// // reset
+// items.forEach(i =>
+//   i.classList.remove("completed", "active", "upcoming")
+// );
+
+// // Dec–Jan
+// if (m === 11 || m === 0) {
+//   items[0]?.classList.add("active");
+//   items[1]?.classList.add("upcoming");
+//   items[2]?.classList.add("upcoming");
+// }
+
+// // Feb–Mar
+// else if (m === 1 || m === 2) {
+//   items[0]?.classList.add("completed");
+//   items[1]?.classList.add("active");
+//   items[2]?.classList.add("upcoming");
+// }
+
+// // April+
+// else {
+//   items[0]?.classList.add("completed");
+//   items[1]?.classList.add("completed");
+//   items[2]?.classList.add("active");
+// }
+// // toogle - team section start
+
+
+
 
 /* ===============================
-   AUTO TIMELINE STATE (YEAR SAFE)
+   PREMIUM TIMELINE SCROLL ENGINE
 ================================ */
-const now = new Date();
-const m = now.getMonth(); // 0–11
+/* ===============================
+   CINEMATIC TIMELINE LOGIC
+================================ */
 
-const items = document.querySelectorAll(".timeline-item");
+const timeline = document.querySelector(".timeline-wrap");
+const items = [...document.querySelectorAll(".timeline-item")];
+const progress = document.getElementById("timelineProgress");
 
-// reset
-items.forEach(i =>
-  i.classList.remove("completed", "active", "upcoming")
-);
+function updateTimeline() {
+  if (!timeline) return;
 
-// Dec–Jan
-if (m === 11 || m === 0) {
-  items[0]?.classList.add("active");
-  items[1]?.classList.add("upcoming");
-  items[2]?.classList.add("upcoming");
+  const rect = timeline.getBoundingClientRect();
+  const vh = window.innerHeight;
+
+  /* progress */
+  const total = rect.height - vh * 0.3;
+  const scrolled = Math.min(
+    Math.max(vh * 0.3 - rect.top, 0),
+    total
+  );
+  const percent = Math.max(0, Math.min(scrolled / total, 1));
+  progress.style.height = `${percent * 100}%`;
+
+  /* active index */
+  const index = Math.min(
+    items.length - 1,
+    Math.floor(percent * items.length)
+  );
+
+  items.forEach((item, i) => {
+    item.classList.remove("is-active", "is-past", "is-future");
+
+    if (i < index) item.classList.add("is-past");
+    else if (i === index) item.classList.add("is-active");
+    else item.classList.add("is-future");
+  });
 }
 
-// Feb–Mar
-else if (m === 1 || m === 2) {
-  items[0]?.classList.add("completed");
-  items[1]?.classList.add("active");
-  items[2]?.classList.add("upcoming");
+/* buttery smooth */
+let ticking = false;
+function onScroll() {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      updateTimeline();
+      ticking = false;
+    });
+    ticking = true;
+  }
 }
 
-// April+
-else {
-  items[0]?.classList.add("completed");
-  items[1]?.classList.add("completed");
-  items[2]?.classList.add("active");
-}
-// toogle - team section start
-
-
+window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("resize", updateTimeline);
+updateTimeline();
 /* ===============================
    TEAM INTERACTIONS
 ================================ */
@@ -649,9 +983,9 @@ const TEAM_DATA = {
 const teamQuickView = document.getElementById("teamQuickView");
 
 /* OPEN */
-document.querySelectorAll(".team-toggle").forEach(btn => {
+document.querySelectorAll(".team-profile-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    const key = btn.closest(".team-card").dataset.member;
+    const key = btn.closest(".team-member-card").dataset.member;
     openQuickView(key);
   });
 });
@@ -737,3 +1071,6 @@ sheet.addEventListener("touchend", () => {
 
   startY = currentY = 0;
 });
+/* ===============================
+   PROJECT PANEL — FIXED
+================================ */

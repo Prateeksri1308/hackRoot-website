@@ -8,6 +8,12 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="Assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="Assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="Assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="Assets/favicon/site.webmanifest">
+<meta name="theme-color" content="#020617">
+
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
@@ -18,9 +24,48 @@
   <div class="container header-inner">
 
     <!-- BRAND -->
-    <a class="brand premium-brand" href="#home">
-  <span class="brand-main">hack</span><span class="brand-accent">Root</span>
+    <a href="#home" class="brand premium-brand" aria-label="hackRoot home"
+   style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+
+  <!-- WEB ICON -->
+  <img
+    src="Assets/favicon/android-chrome-192x192.png"
+    alt="hackRoot"
+    width="48"
+    height="48"
+    style="
+      width:48px;
+      height:48px;
+      padding:10px;
+      border-radius:14px;
+      background:#020617;
+
+      border:1px solid rgba(255,255,255,0.18);
+
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.12),
+        inset 0 0 18px rgba(120,51,254,0.18),
+        0 10px 28px rgba(2,6,23,0.85);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    "
+  />
+
+  <!-- BRAND TEXT -->
+  <span style="
+    font-size:1.4rem;
+    font-weight:800;
+    letter-spacing:.4px;
+    color:#ffffff;
+    line-height:1;
+  ">
+    hack<span style="color:#7833fe;">Root</span>
+  </span>
+
 </a>
+
 
 
     <!-- NAV -->
@@ -82,7 +127,7 @@
 
 
     <!-- TEAM -->
-   <section id="team" class="section team-premium">
+   <section id="team" class="section team-section-premium">
   <div class="container">
 
     <!-- HEADER -->
@@ -96,30 +141,30 @@
     </div>
 
     <!-- GRID -->
-    <div class="team-grid-premium">
+    <div class="team-grid">
 
       <!-- Prateek -->
-      <article class="team-card lead" data-member="prateek">
-        <div class="team-avatar">
+      <article class="team-member-card lead" data-member="prateek">
+        <div class="team-member-avatar">
           <img src="Assets/my pic.jpg" alt="Prateek">
-          <span class="team-badge">Lead</span>
+          <span class="team-lead-badge">Lead</span>
 
-          <div class="team-social">
+          <div class="team-member-social">
             <a href="https://www.linkedin.com/in/prateek-srivastava-backend/" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://github.com/prateeksri1308/" target="_blank"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
 
-        <div class="team-body">
+        <div class="team-member-body">
           <h3>Prateek</h3>
-          <p class="team-role">AI/ML Engineer · Backend Lead</p>
+          <p class="team-member-role">AI/ML Engineer · Backend Lead</p>
 
-          <div class="team-projects">
+          <div class="team-member-projects">
             <span>AI Fake News</span>
             <span>Healthcare AI</span>
           </div>
 
-          <button class="team-toggle">
+          <button class="team-profile-btn">
             <span>View Profile</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -127,26 +172,26 @@
       </article>
 
       <!-- Suchi -->
-      <article class="team-card" data-member="suchi">
-        <div class="team-avatar">
+      <article class="team-member-card" data-member="suchi">
+        <div class="team-member-avatar">
           <img src="Assets/suchi.jpeg" alt="Suchi">
 
-          <div class="team-social">
+          <div class="team-member-social">
             <a href="https://github.com/suchig9434/" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/suchi-g-b13a4b333/" target="_blank"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
 
-        <div class="team-body">
+        <div class="team-member-body">
           <h3>Suchi</h3>
-          <p class="team-role">Frontend Lead</p>
+          <p class="team-member-role">Frontend Lead</p>
 
-          <div class="team-projects">
+          <div class="team-member-projects">
             <span>UI / UX</span>
             <span>Responsive</span>
           </div>
 
-          <button class="team-toggle">
+          <button class="team-profile-btn">
             <span>View Profile</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -154,26 +199,26 @@
       </article>
 
       <!-- Krishna -->
-      <article class="team-card" data-member="krishna">
-        <div class="team-avatar">
+      <article class="team-member-card" data-member="krishna">
+        <div class="team-member-avatar">
           <img src="Assets/krishna.jpeg" alt="Krishna">
 
-          <div class="team-social">
+          <div class="team-member-social">
             <a href="https://github.com/codewithkrishna09/" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/krishna-jaiswal-177a86399/" target="_blank"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
 
-        <div class="team-body">
+        <div class="team-member-body">
           <h3>Krishna</h3>
-          <p class="team-role">Database Engineer</p>
+          <p class="team-member-role">Database Engineer</p>
 
-          <div class="team-projects">
+          <div class="team-member-projects">
             <span>SQL</span>
             <span>Optimization</span>
           </div>
 
-          <button class="team-toggle">
+          <button class="team-profile-btn">
             <span>View Profile</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -181,26 +226,26 @@
       </article>
 
       <!-- Lakshya -->
-      <article class="team-card" data-member="lakshya">
-        <div class="team-avatar">
+      <article class="team-member-card" data-member="lakshya">
+        <div class="team-member-avatar">
           <img src="Assets/lakshya.jpg" alt="Lakshya">
 
-          <div class="team-social">
+          <div class="team-member-social">
             <a href="https://github.com/lakshyajaiswal123/" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/lakshya-jaiswal-356106385/" target="_blank"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
 
-        <div class="team-body">
+        <div class="team-member-body">
           <h3>Lakshya</h3>
-          <p class="team-role">MERN Developer</p>
+          <p class="team-member-role">MERN Developer</p>
 
-          <div class="team-projects">
+          <div class="team-member-projects">
             <span>React</span>
             <span>Node</span>
           </div>
 
-          <button class="team-toggle">
+          <button class="team-profile-btn">
             <span>View Profile</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -208,26 +253,26 @@
       </article>
 
       <!-- Shivi -->
-      <article class="team-card" data-member="shivi">
-        <div class="team-avatar">
+      <article class="team-member-card" data-member="shivi">
+        <div class="team-member-avatar">
           <img src="Assets/shivi.jpeg" alt="Shivi">
 
-          <div class="team-social">
+          <div class="team-member-social">
             <a href="https://github.com/shivigoel9/" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/shivi-goel-604845327/" target="_blank"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
 
-        <div class="team-body">
+        <div class="team-member-body">
           <h3>Shivi</h3>
-          <p class="team-role">Frontend Support · QA</p>
+          <p class="team-member-role">Frontend Support · QA</p>
 
-          <div class="team-projects">
+          <div class="team-member-projects">
             <span>Testing</span>
             <span>Docs</span>
           </div>
 
-          <button class="team-toggle">
+          <button class="team-profile-btn">
             <span>View Profile</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
@@ -237,88 +282,364 @@
     </div>
   </div>
 </section>
+<!-- project section start here  -->
 
-
-
-    <!-- Projects -->
-    <section id="projects" class="section alt">
-      <div class="container">
-        <h2>Projects</h2>
-        <div class="grid projects-grid">
-          <article class="project-card">
-            <h3>AI Fake News & Scam Detection</h3>
-            <p>ML classifier + GenAI explanation, URL scanner, Flask backend, React dashboard.</p>
-            <a class="btn-ghost" href="#">Read Brief</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Healthcare Medical Report Summarizer</h3>
-            <p>GenAI summarization, risk analysis, secure backend for patient data.</p>
-            <a class="btn-ghost" href="#">Read Brief</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Timeline -->
-   <section id="timeline" class="section timeline-section">
+<!-- Projects -->
+    <!-- ===============================
+     PROJECTS (PREMIUM – IN PROGRESS)
+================================ -->
+<section id="projects" class="section projects-premium">
   <div class="container">
-    <h2 class="timeline-title">Timeline & Milestones</h2>
-    <p class="muted timeline-sub">
-      Our journey from learning to hackathon execution.
-    </p>
 
-    <div class="timeline-wrap">
+    <div class="projects-head">
+      <span class="projects-eyebrow">WHAT WE’RE BUILDING</span>
+      <h2 class="projects-title">Core Projects</h2>
+      <p class="projects-subtitle">
+        Focused initiatives our team is actively designing and developing.
+        Built with long-term impact in mind.
+      </p>
+    </div>
 
-      <!-- PROGRESS LINE (REQUIRED) -->
-      <div class="timeline-progress" id="timelineProgress"></div>
+    <div class="projects-stack">
 
-      <!-- ITEM 1 -->
-      <div class="timeline-item">
-        <span class="timeline-dot"></span>
-        <div class="timeline-card">
-          <h3>Dec – Jan</h3>
-          <p>Learning Phase: Python, ML, HTML/CSS/JS, SQL, React basics.</p>
-          <span class="timeline-tag">Learning</span>
+      <!-- PROJECT 1 -->
+      <article class="project-glass project-click"
+      data-principles="Explainable AI,Security First"
+  data-title="AI Fake News & Scam Detection"
+  data-desc="An AI-driven system to identify misinformation and scam content using ML with explainable AI outputs."
+  data-problem="Fake news and scam content spreads rapidly on social media, misleading users and causing financial and social harm."
+  data-solution="We use machine learning models with explainable AI techniques to classify content and clearly show why it is flagged."
+  data-architecture="Data Collection > Text Preprocessing > ML Classification > Explainability Layer > REST API > Frontend Dashboard"
+  data-tech="Python,Machine Learning,Flask,React,GenAI"
+  data-owners="
+  prateek|AI Backend,
+  suchi|Frontend,
+  krishna|Database,
+  lakshya|UI/UX,
+  shivi|Docs
+  "
+    data-progress="35"
+  data-confidence="High,Medium,Low"
+  data-roadmap="Research|done,Model Training|active,API Integration|pending,UI Polish|pending"
+  data-github="https://github.com/hackroot/ai-fake-news"
+  data-demo="assets/demo.mp4">
+
+
+  <div class="project-top">
+    <span class="launch-badge building">BUILDING</span>
+  </div>
+
+  <h3>AI Fake News & Scam Detection</h3>
+
+  <p class="project-desc">
+    Detect misinformation and online scams using AI-powered classification and explanations.
+  </p>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span>35%</span>
+    </div>
+    <div class="progress-bar">
+      <span style="width:35%"></span>
+    </div>
+  </div>
+
+  <!-- FOOT -->
+  <div class="project-foot">
+    <span class="view-details">View Details →</span>
+    <span class="github-link">GitHub</span>
+  </div>
+</article>
+
+
+      <!-- PROJECT 2 -->
+<article class="project-glass project-click"
+data-principles="Explainable AI,Security First"
+  data-title="Healthcare Report Summarizer"
+  data-desc="AI tool to summarize medical reports securely."
+  data-problem="Medical reports are complex and difficult for patients to understand, leading to misinterpretation and anxiety."
+  data-solution="We use secure NLP-based GenAI models to generate simplified summaries while preserving medical accuracy and privacy."
+  data-architecture="Secure Upload > Text Parsing > Medical NLP Model > Risk Highlighting > Summary Generator > Encrypted Output"
+  data-tech="GenAI,NLP,Healthcare"
+  data-owners="
+suchi|Frontend,
+prateek|Backend,
+lakshya|UI/UX,
+shivi|Documentation,
+krishna|Database
+"
+
+  data-owners="Suchi (Frontend), Prateek (Backend), Lakshya (Frotend Ui/UX), Shivi (Documentation), Krishna (DB)"
+  data-confidence="Medium,Low,Low"
+  data-roadmap="Problem Study|done,Data Pipeline|active,LLM Prompting|pending"
+  data-github="#"
+  data-demo="">
+        <div class="project-top">
+          <span class="project-status planning">PLANNING PHASE</span>
         </div>
+
+        <h3>Healthcare Report Summarizer</h3>
+
+        <p class="project-desc">
+          A secure AI-based tool to summarize medical reports, highlight
+          risks, and improve patient understanding without compromising privacy.
+        </p>
+
+        <div class="project-focus">
+          <span>Problem: Medical Complexity</span>
+          <span>Focus: Healthcare AI</span>
+        </div>
+
+        <div class="project-tech">
+          <span>GenAI</span>
+          <span>NLP</span>
+          <span>Backend APIs</span>
+          <span>Data Security</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+<!-- PRINCIPLES (MERGED WITH PROJECTS) -->
+ <div class="container">
+<div class="principles-merged">
+
+  <div class="principles-head">
+    <h3>
+      How We Build
+      <span class="badge-nonneg">NON-NEGOTIABLES</span>
+    </h3>
+
+    <button class="principles-toggle" aria-expanded="false">
+  <span>View Principles</span>
+  <i class="fa-solid fa-chevron-down"></i>
+</button>
+
+  </div>
+
+<ul class="principles-list" id="principlesList">
+    <li data-phase="learning">Build for real problems, not demos</li>
+    <li data-phase="building">Explainable AI over black boxes</li>
+    <li data-phase="building">Security and trust first</li>
+    <li data-phase="hackathon">Ship only what we stand behind</li>
+  </ul>
+
+</div>
+</div>
+
+    </section>
+    
+
+
+<!-- PROJECT DETAIL MODAL -->
+<!-- PROJECT DETAIL MODAL -->
+<!-- PROJECT PANEL (PREMIUM) -->
+<div id="projectModal" class="project-modal">
+
+  <div class="project-overlay"></div>
+
+  <div class="project-panel premium-panel ">
+
+    <!-- CLOSE -->
+    <button class="project-close" aria-label="Close project">×</button>
+
+    <!-- HEADER -->
+    <header class="pp-header">
+      <div>
+        <span id="ppStatus" class="pp-status building">BUILDING</span>
+        <h2 id="ppTitle"></h2>
+        <p id="ppTagline"></p>
       </div>
 
-      <!-- ITEM 2 -->
-      <div class="timeline-item">
-        <span class="timeline-dot"></span>
-        <div class="timeline-card">
-          <h3>Feb – Mar</h3>
-          <p>Dummy projects: chatbot, URL scanner, AI classifier.</p>
-          <span class="timeline-tag">Building</span>
-        </div>
+      <div class="pp-actions">
+        <a id="ppGithub" target="_blank" class="btn-ghost">GitHub</a>
+        <a id="ppDemo" target="_blank" class="btn-primary">Live Demo</a>
       </div>
+    </header>
 
-      <!-- ITEM 3 -->
-      <div class="timeline-item">
-        <span class="timeline-dot"></span>
-        <div class="timeline-card highlight">
-          <h3>April</h3>
-          <p>Hackathon: finalize project, deploy & present.</p>
-          <span class="timeline-tag glow">Hackathon</span>
-        </div>
+    <!-- BODY GRID -->
+    <div class="pp-body">
+
+      <!-- LEFT : META -->
+      <aside class="pp-meta">
+
+        
+        <section>
+          <h4>Tech Stack</h4>
+          <div id="ppTech" class="tag-list"></div>
+        </section>
+
+        <section>
+          <h4>Principles</h4>
+          <div id="ppPrinciples" class="tag-list subtle"></div>
+        </section>
+<section>
+          <h3>Roadmap</h3>
+          <ul id="ppRoadmap" class="roadmap-list"></ul>
+        </section>
+
+        <section>
+  <h4>Readiness</h4>
+
+  <div class="readiness-adv">
+    <div class="readiness-item" data-type="model">
+      <div class="r-head">
+        <span>Model</span>
+        <em class="r-status">In Progress</em>
       </div>
+      <div class="r-bar"><span></span></div>
+      <p class="r-desc">Core ML model implemented, tuning in progress.</p>
+    </div>
 
+    <div class="readiness-item" data-type="data">
+      <div class="r-head">
+        <span>Data</span>
+        <em class="r-status">Partial</em>
+      </div>
+      <div class="r-bar"><span></span></div>
+      <p class="r-desc">Dataset collected, labeling ongoing.</p>
+    </div>
+
+    <div class="readiness-item" data-type="infra">
+      <div class="r-head">
+        <span>Infra</span>
+        <em class="r-status">Planned</em>
+      </div>
+      <div class="r-bar"><span></span></div>
+      <p class="r-desc">Deployment pipeline planned.</p>
     </div>
   </div>
 </section>
 
 
-    <!-- <form id="joinForm" class="premium-form" action="http://127.0.0.1:5000/submit" method="POST"> -->
+      </aside>
+
+      <!-- RIGHT : CONTENT -->
+      <main class="pp-content">
+
+        <section class="pp-block problem">
+  <h3>Problem</h3>
+  <p id="ppProblem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis temporibus alias quisquam, esse veritatis obcaecati odio repellendus error dicta pariatur unde explicabo nulla accusantium dolore ipsum officiis eius ab. Assumenda?
+  Tenetur omnis quasi, ipsa sed sint itaque natus iste quibusdam, a molestiae odio ipsum saepe nulla provident voluptate id maiores corrupti aliquid adipisci porro earum dolore. Laborum et atque vel!
+  Facilis, eligendi ea. Eligendi ipsum odit quos fugit ipsam eum perferendis consequatur consequuntur optio veniam facere labore delectus velit recusandae repellendus hic deserunt, laboriosam exercitationem alias quibusdam error consectetur! Repellendus!</p>
+</section>
+
+<section class="pp-block solution">
+  <h3>Solution</h3>
+  <p id="ppSolution"></p>
+</section>
+
+<section class="pp-block architecture">
+  <h3>Architecture</h3>
+  <div id="ppArchitecture" class="arch-steps"></div>
+</section>
+
+
+        <section>
+  <h3>Team Contributions</h3>
+  <div id="ppOwners" class="pp-team"></div>
+</section>
+
+
+        
+
+      </main>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- project section ended here  -->
+    <!-- Timeline -->
+    <!-- /* --------------------------Lakshya-section-Start------------------ */ -->
+
+   <!-- Timeline -->
+<section id="timeline" class="section timeline-section">
+
+  <!-- Heading -->
+  <section class="timeline-heading">
+    <span class="timeline-eyebrow">OUR JOURNEY</span>
+
+    <h2 class="timeline-title">
+      Timeline <span>&</span> Milestones
+    </h2>
+
+    <p class="timeline-subtitle">
+      Our journey from learning foundations to real-world hackathon execution.
+    </p>
+  </section>
+
+  <!-- Timeline -->
+  <div class="timeline-wrap">
+
+    <!-- progress line -->
+    <div class="timeline-progress" id="timelineProgress"></div>
+
+    <!-- ITEM 1 -->
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-card current">
+        <span class="current-badge">CURRENT</span>
+        <h3>Dec – Jan</h3>
+        <p>Learning Phase: Python, ML, HTML/CSS/JS, SQL, React basics.</p>
+        <span class="timeline-tag">Learning</span>
+      </div>
+    </div>
+
+    <!-- ITEM 2 -->
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-card">
+        <h3>Feb – Mar</h3>
+        <p>Dummy projects: chatbot, URL scanner, AI classifier.</p>
+        <span class="timeline-tag">Building</span>
+      </div>
+    </div>
+
+    <!-- ITEM 3 -->
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-card">
+        <h3>April</h3>
+        <p>Hackathon: finalize project, deploy & present.</p>
+        <span class="timeline-tag glow">Hackathon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- /* --------------------------Lakshya-section-end------------------ */ -->
+
+
+
+ <!-- <form id="joinForm" class="premium-form" action="http://127.0.0.1:5000/submit" method="POST"> -->
 
     <!-- Contact -->
     <section id="contact" class="section contact-fullwidth">
   <div class="contact-fullwidth-bg">
     <div class="container contact-form-wrap">
+      <!-- CONTACT SECTION HEADING (LIKE OTHER SECTIONS) -->
+      <div class="contact-heading">
+        <span class="contact-eyebrow">OUR COMMUNITY</span>
+        
+        <h2 class="contact-title">
+          Join <span>&</span> Contact
+        </h2>
+        
+        <p class="contact-subtitle">
+          Tell us how you'd like to help — one message, long-term impact.
+        </p>
+        
+        <span class="verified-badge">✔ HackRoot Verified</span>
+      </div>
       <div class="form-panel">
-        <div class="panel-head">
-          <h2>Join / Contact</h2>
-          <p class="muted">Tell us how you'd like to help — one message, long-term impact.</p>
-        </div>
+
 
         <form id="joinForm" class="premium-form"  action="http://127.0.0.1:5000/submit" method="POST" novalidate>
           <div class="row">
@@ -382,12 +703,122 @@
 
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>HackRoot — Follow our journey on <a href="#">GitHub</a></p>
-      <small>Meeting cadence: Weekly check-ins (Dec–Jan) → 2x/week (Feb–Mar) → Daily (April).</small>
+   <footer class="site-footer">
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-grid">
+
+    <!-- BRAND -->
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:12px;">
+
+  <!-- FOOTER WEB ICON -->
+  <img
+    src="Assets/favicon/android-chrome-192x192.png"
+    alt="hackRoot"
+    width="40"
+    height="40"
+    style="
+      width:40px;
+      height:40px;
+      padding:8px;
+      border-radius:12px;
+      background:#020617;
+
+      border:1px solid rgba(255,255,255,0.16);
+
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.10),
+        inset 0 0 14px rgba(120,51,254,0.16),
+        0 8px 20px rgba(2,6,23,0.85);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    "
+  />
+
+  <!-- FOOTER BRAND TEXT -->
+  <span style="
+    font-size:1.25rem;
+    font-weight:800;
+    letter-spacing:.4px;
+    color:#ffffff;
+    line-height:1;
+  ">
+    hack<span style="color:#7833fe;">Root</span>
+  </span>
+
+</div>
+
+
+      <span class="footer-badge">
+        🛡 Built for Hackathons • Secure by Design
+      </span>
+
+      <p class="footer-tagline">
+        An elite hackathon team engineering AI-first, production-ready systems.
+      </p>
+
+      <p class="footer-email">
+        <a href="mailto:hello@hackroot.in">hello@hackroot.in</a>
+      </p>
     </div>
-  </footer>
+
+    <!-- EXPLORE -->
+    <div class="footer-links">
+      <h4>Explore</h4>
+      <a href="/hackRoot-website/index.html#home">Home</a>
+      <a href="/hackRoot-website/index.html#projects">Projects</a>
+      <a href="/hackRoot-website/index.html#team">Team</a>
+      <a href="/hackRoot-website/index.html#contact">Join Us</a>
+    </div>
+
+    <!-- FOCUS AREAS (FIXED: span → a) -->
+    <div class="footer-links">
+      <h4>Focus Areas</h4>
+      <a href="/hackRoot-website/pages/ai-ml.html" data-filter="ai">AI & ML</a>
+      <a href="/hackRoot-website/pages/cybersecurity.html" data-filter="cyber">Cybersecurity</a>
+      <a href="/hackRoot-website/pages/backend.html" data-filter="backend">Backend</a>
+      <a href="/hackRoot-website/pages/hackathons.html">Hackathons</a>
+    </div>
+
+    <!-- VISIT -->
+    <div class="footer-links">
+      <h4>Visit Us</h4>
+      <a href="/hackRoot-website/pages/devfolio.html" target="_blank" rel="noopener">Devfolio</a>
+      <a href="/hackRoot-website/pages/devpost.html" target="_blank" rel="noopener">Devpost</a>
+      <a href="/hackRoot-website/pages/unstop.html"target="_blank" rel="noopener">Unstop</a>
+      <a href="/hackRoot-website/pages/hackerrank.html" target="_blank" rel="noopener">HackerRank</a>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="footer-bottom">
+    <span>© <span id="footerYear"></span> hackRoot</span>
+
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/hackroothq/" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/hackroothq/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://x.com/hackroothq/" target="_blank" rel="noopener">
+        <i class="fab fa-x-twitter"></i>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61585554745520" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61585554745520" target="_blank" rel="noopener">
+        <i class="fab fa-discord"></i>
+      </a>
+    </div>
+  </div>
+
+</footer>
 
 <!-- GIF SUCCESS POPUP -->
 
