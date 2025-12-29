@@ -1074,3 +1074,66 @@ sheet.addEventListener("touchend", () => {
 /* ===============================
    PROJECT PANEL — FIXED
 ================================ */
+
+// loading-page
+
+/* ===============================
+   PAGE LOAD CONTROL
+================================ */
+/* ===============================
+   BRAND LOADER CONTROL
+================================ */
+document.documentElement.style.overflow = "hidden";
+
+window.addEventListener("load", () => {
+  const loader = document.getElementById("brandLoader");
+
+  setTimeout(() => {
+    document.body.classList.add("page-loaded");
+  }, 200);
+
+  setTimeout(() => {
+    loader.classList.add("hide");
+    document.documentElement.style.overflow = "auto";
+  }, 800);
+});
+
+
+
+// slowly reveal
+
+
+/* ===============================
+   SCROLL REVEAL (SAFE – TIMELINE EXCLUDED)
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const revealItems = document.querySelectorAll(
+    ".reveal, .reveal-fade, .reveal-lift, .reveal-glass, .reveal-scale, .reveal-stagger"
+  );
+
+  if (!("IntersectionObserver" in window)) {
+    revealItems.forEach(el => el.classList.add("visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -80px 0px"
+    }
+  );
+
+  revealItems.forEach(el => {
+    // ⛔ SKIP TIMELINE COMPLETELY
+    if (el.closest("#timeline")) return;
+    observer.observe(el);
+  });
+});
