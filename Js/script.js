@@ -3,9 +3,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("joinForm");
-  const ENDPOINT = "https://ct81fshw-5000.inc1.devtunnels.ms/submit";
+const ENDPOINT = form.getAttribute("action");
 
   let ticking = false;
+
 
 window.addEventListener("scroll", () => {
   if (ticking) return;
@@ -19,6 +20,11 @@ window.addEventListener("scroll", () => {
   });
 });
 
+// ⏱️ Anti-bot timing stamp
+const tsField = document.getElementById("form_ts");
+if (tsField) {
+  tsField.value = Date.now() / 1000; // seconds
+}
   // core nodes
   const submitBtn = form?.querySelector(".submit-btn");
   const statusMsg =
@@ -38,6 +44,19 @@ window.addEventListener("scroll", () => {
   const emailInput = form?.querySelector('input[name="email"]') || null;
   const nameInput = form?.querySelector('input[name="name"]') || null;
   const messageInput = form?.querySelector('textarea[name="message"]') || null;
+
+  // 🔁 Show captcha again when user starts typing
+function showCaptchaIfHidden() {
+  const captchaWrap = document.getElementById("captchaWrap");
+  if (captchaWrap && captchaWrap.style.display === "none") {
+    captchaWrap.style.display = "";
+  }
+}
+
+// show captcha when user starts typing again
+[nameInput, emailInput, phoneInput, messageInput].forEach(el => {
+  el?.addEventListener("input", showCaptchaIfHidden);
+});
 
   /* ================= LOTTIE ================= */
   let lottieAvailable = false;
@@ -246,75 +265,128 @@ window.addEventListener("scroll", () => {
 
   /* ================= FETCH WITH TIMEOUT ================= */
   async function fetchWithTimeout(resource, options = {}, timeout = 15000) {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), timeout);
-    try {
-      const resp = await fetch(resource, { ...options, signal: controller.signal });
-      clearTimeout(id);
-      return resp;
-    } catch (err) {
-      clearTimeout(id);
-      throw err;
-    }
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(resource, {
+      ...options,
+      signal: controller.signal
+    });
+    clearTimeout(id); // 🔴 CRITICAL
+    return response;
+  } catch (err) {
+    clearTimeout(id); // 🔴 CRITICAL
+    throw err;
   }
+}
+
 
   /* ================= SUBMIT HANDLER ================= */
   form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    clearInvalidAll();
+  e.preventDefault();
+  clearInvalidAll();
 
-    const v = validateForm();
-    if (!v.ok) {
-      showError(v.msg);
-      markInvalid(v.field);
-      v.field.focus();
+  const v = validateForm();
+  if (!v.ok) {
+    showError(v.msg);
+    markInvalid(v.field);
+    v.field.focus();
+    return;
+  }
+
+  // 🔐 CAPTCHA CHECK
+  if (typeof grecaptcha !== "undefined") {
+    const captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+      showError("Please verify that you are not a robot.");
       return;
     }
+  }
 
   startLoading();
 
-// ⭐⭐⭐ OPTIMISTIC POPUP — SHOW AFTER 3 SECONDS ⭐⭐⭐
-setTimeout(() => {
-  showGifSuccess("Sending...", "We are submitting your request...");
-}, 4000);
+  // sanitize phone
+  let digits = phoneInput.value.replace(/\D/g, "");
+  if (digits.startsWith("91") && digits.length === 12) digits = digits.slice(2);
+  if (digits.startsWith("0") && digits.length === 11) digits = digits.slice(1);
+  phoneInput.value = digits;
+
+  const formData = new FormData(form);
+
+  try {
+const response = await fetch(ENDPOINT, {
+  method: "POST",
+  body: formData
+});
 
 
+    let data = null;
 
-    // sanitize phone
-    let digits = phoneInput.value.replace(/\D/g, "");
-    if (digits.startsWith("91") && digits.length === 12) digits = digits.slice(2);
-    if (digits.startsWith("0") && digits.length === 11) digits = digits.slice(1);
-    phoneInput.value = digits;
+// 🔥 RATE LIMIT — FIRST (NO JSON PARSE)
+if (response.status === 429) {
+  stopLoading();
+  showError("Too many attempts. Please wait a minute.");
+  return;
+}
 
-    const formData = new FormData(form);
+// ✅ TRY JSON SAFELY
+try {
+  data = await response.json();
+} catch {
+  data = {};
+}
 
-    try {
-      const response = await fetchWithTimeout(
-        ENDPOINT,
-        { method: "POST", body: formData },
-        15000
-      );
+stopLoading();
 
-      if (!response.ok) {
-        hideGifSuccess();
-        stopLoading();
-        showError("Server error. Please try again.");
-        return;
-      }
 
-      // SUCCESS — Update popup text
-      gifTitle.textContent = "Message Sent!";
-      gifMessage.textContent = "Thanks — we'll contact you soon.";
+// 🛡 BLOCKED (honeypot / timing)
+if (data.status === "blocked") {
+  return; // silent
+}
 
-      stopLoading();
-      resetForm();
+// ❌ CAPTCHA FAILED
+if (data.status === "error" && data.message?.includes("Captcha")) {
+  showError("Captcha verification failed. Try again.");
+  grecaptcha.reset?.();
+  return;
+}
 
-    } catch (err) {
-      hideGifSuccess();
-      stopLoading();
-      showError("Network error. Try again.");
-    }
-  });
+// ❌ GENERIC ERROR
+if (data.status !== "success") {
+  showError("Something went wrong. Please try again.");
+  return;
+}
+
+
+    // ✅ SUCCESS
+    showTickPopup(
+      "Message Sent!",
+      "Thanks — we'll get back to you soon."
+    );
+
+    resetForm();
+// reset captcha token
+grecaptcha.reset?.();
+
+// hide captcha after success
+const captchaWrap = document.getElementById("captchaWrap");
+if (captchaWrap) {
+  captchaWrap.style.display = "none";
+}
+    nameInput?.focus();
+    stopLoading();
+
+
+  } catch (err) {
+    stopLoading();
+if (err.name === "AbortError") {
+    showError("Request timed out. Please try again.");
+  } else {
+    showError("Something went wrong. Please try again.");
+  }  }
+});
+
 
   /* ================= HELPERS ================= */
   function showError(msg) {
@@ -324,12 +396,31 @@ setTimeout(() => {
     setTimeout(() => (statusMsg.textContent = ""), 4200);
   }
 
-  function resetForm() {
-    form.reset();
-    [nameInput, emailInput, phoneInput, messageInput].forEach((el) =>
-      el?.classList.remove("invalid")
-    );
+ function resetForm() {
+  form.reset();
+
+  // reset timestamp (anti-bot)
+  const tsField = document.getElementById("form_ts");
+  if (tsField) {
+    tsField.value = Date.now() / 1000;
   }
+
+  // clear UI states
+  submitBtn?.classList.remove("loading");
+  form.classList.remove("shake");
+
+  // clear validation styles
+  [nameInput, emailInput, phoneInput, messageInput].forEach(el => {
+    el?.classList.remove("invalid");
+    el?.parentElement?.classList.remove("shake");
+    el?.parentElement?.classList.remove("valid");
+  });
+
+  // clear status text
+  statusMsg.textContent = "";
+}
+
+
 });
 // Step-by-step reveal
 document.addEventListener("DOMContentLoaded", () => {

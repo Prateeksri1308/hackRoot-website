@@ -13,10 +13,39 @@
 <link rel="apple-touch-icon" sizes="180x180" href="Assets/favicon/apple-touch-icon.png">
 <link rel="manifest" href="Assets/favicon/site.webmanifest">
 <meta name="theme-color" content="#020617">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
+<!-- GLOBAL PAGE LOADER -->
+<!-- PREMIUM BRAND LOADER -->
+<div id="brandLoader" class="brand-loader">
+  <div class="brand-loader-inner">
+
+    <!-- Logo -->
+    <div class="brand-logo-wrap">
+      <img
+        src="Assets/favicon/android-chrome-192x192.png"
+        alt="HackRoot"
+        class="brand-logo"
+      />
+      <span class="energy-ring"></span>
+    </div>
+
+    <!-- Brand text -->
+    <div class="brand-loader-text">
+      <span class="brand-name">
+        hack<span>Root</span>
+      </span>
+      <span class="brand-tagline">
+        Engineering the Core
+      </span>
+    </div>
+
+  </div>
+</div>
+
 
   <!-- edit nav ---by Prateek  -->
 
@@ -92,7 +121,7 @@
 
   <main>
     <!-- HERO -->
-    <section id="home" class="hero-premium">
+    <section id="home" class="hero-premium reveal-fade">
   <div class="hero-bg"></div>
 
   <div class="container hero-inner">
@@ -127,7 +156,7 @@
 
 
     <!-- TEAM -->
-   <section id="team" class="section team-section-premium">
+   <section id="team" class="section team-section-premium reveal">
   <div class="container">
 
     <!-- HEADER -->
@@ -141,7 +170,7 @@
     </div>
 
     <!-- GRID -->
-    <div class="team-grid">
+    <div class="team-grid reveal-stagger">
 
       <!-- Prateek -->
       <article class="team-member-card lead" data-member="prateek">
@@ -288,7 +317,7 @@
     <!-- ===============================
      PROJECTS (PREMIUM – IN PROGRESS)
 ================================ -->
-<section id="projects" class="section projects-premium">
+<section id="projects" class="section projects-premium reveal">
   <div class="container">
 
     <div class="projects-head">
@@ -300,10 +329,10 @@
       </p>
     </div>
 
-    <div class="projects-stack">
+    <div class="projects-stack reveal-stagger">
 
       <!-- PROJECT 1 -->
-      <article class="project-glass project-click"
+      <article class="project-glass project-click reveal-lift"
       data-principles="Explainable AI,Security First"
   data-title="AI Fake News & Scam Detection"
   data-desc="An AI-driven system to identify misinformation and scam content using ML with explainable AI outputs."
@@ -355,7 +384,7 @@
 
 
       <!-- PROJECT 2 -->
-<article class="project-glass project-click"
+<article class="project-glass project-click reveal-lift"
 data-principles="Explainable AI,Security First"
   data-title="Healthcare Report Summarizer"
   data-desc="AI tool to summarize medical reports securely."
@@ -440,7 +469,7 @@ krishna|Database
 
   <div class="project-overlay"></div>
 
-  <div class="project-panel premium-panel ">
+  <div class="project-panel premium-panel reveal-scale">
 
     <!-- CLOSE -->
     <button class="project-close" aria-label="Close project">×</button>
@@ -559,7 +588,7 @@ krishna|Database
     <!-- /* --------------------------Lakshya-section-Start------------------ */ -->
 
    <!-- Timeline -->
-<section id="timeline" class="section timeline-section">
+<section id="timeline" class="section timeline-section ">
 
   <!-- Heading -->
   <section class="timeline-heading">
@@ -575,13 +604,13 @@ krishna|Database
   </section>
 
   <!-- Timeline -->
-  <div class="timeline-wrap">
+  <div class="timeline-wrap reveal-stagger">
 
     <!-- progress line -->
     <div class="timeline-progress" id="timelineProgress"></div>
 
     <!-- ITEM 1 -->
-    <div class="timeline-item">
+    <div class="timeline-item ">
       <span class="timeline-dot"></span>
       <div class="timeline-card current">
         <span class="current-badge">CURRENT</span>
@@ -592,7 +621,7 @@ krishna|Database
     </div>
 
     <!-- ITEM 2 -->
-    <div class="timeline-item">
+    <div class="timeline-item ">
       <span class="timeline-dot"></span>
       <div class="timeline-card">
         <h3>Feb – Mar</h3>
@@ -602,7 +631,7 @@ krishna|Database
     </div>
 
     <!-- ITEM 3 -->
-    <div class="timeline-item">
+    <div class="timeline-item ">
       <span class="timeline-dot"></span>
       <div class="timeline-card">
         <h3>April</h3>
@@ -621,7 +650,7 @@ krishna|Database
  <!-- <form id="joinForm" class="premium-form" action="http://127.0.0.1:5000/submit" method="POST"> -->
 
     <!-- Contact -->
-    <section id="contact" class="section contact-fullwidth">
+    <section id="contact" class="section contact-fullwidth reveal-glass">
   <div class="contact-fullwidth-bg">
     <div class="container contact-form-wrap">
       <!-- CONTACT SECTION HEADING (LIKE OTHER SECTIONS) -->
@@ -639,7 +668,6 @@ krishna|Database
         <span class="verified-badge">✔ HackRoot Verified</span>
       </div>
       <div class="form-panel">
-
 
         <form id="joinForm" class="premium-form"  action="http://127.0.0.1:5000/submit" method="POST" novalidate>
           <div class="row">
@@ -672,6 +700,12 @@ krishna|Database
             <label for="message">How you'd like to help</label>
           </div>
 
+          <!-- CAPTCHA -->
+<div class="captcha-wrap" id="captchaWrap">
+  <div class="g-recaptcha" data-sitekey="6LeuXzosAAAAAOGx2RoYKU0-imtugrwBB2RuS080"></div>
+</div>
+
+
           <div class="form-controls">
             <button type="submit" class="submit-btn" aria-live="polite">
               <span class="btn-inner">
@@ -683,6 +717,15 @@ krishna|Database
 
             <div class="status-msg" aria-hidden="true"></div>
           </div>
+          
+          <input type="hidden" name="_ts" id="form_ts">
+
+          <!-- honeypot (invisible) -->
+<div class="hp-field" aria-hidden="true">
+  <input type="text" name="company" tabindex="-1" autocomplete="off">
+</div>
+
+
         </form>
       </div>
     </div>
@@ -809,10 +852,10 @@ krishna|Database
       <a href="https://x.com/hackroothq/" target="_blank" rel="noopener">
         <i class="fab fa-x-twitter"></i>
       </a>
-      <a href="https://www.facebook.com/profile.php?id=61585554745520" target="_blank" rel="noopener">
+      <a href="https://www.facebook.com/profile.php?id=61585888346447/" target="_blank" rel="noopener">
         <i class="fab fa-facebook"></i>
       </a>
-      <a href="https://www.facebook.com/profile.php?id=61585554745520" target="_blank" rel="noopener">
+      <a href="https://dsc.gg/hackroothq/" target="_blank" rel="noopener">
         <i class="fab fa-discord"></i>
       </a>
     </div>

@@ -6,13 +6,19 @@ import queue
 import datetime
 import html as html_lib
 import re
+import requests
 
 from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from flask_cors import CORS
+
 from flask import Flask, request, jsonify, render_template_string
 from dotenv import load_dotenv
+
 
 # ===============================
 # LOAD ENV
@@ -20,6 +26,33 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[]
+)
+# ===============================
+# RECAPTCHA VERIFY
+# ===============================
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY")
+print("RECAPTCHA_SECRET_KEY =", RECAPTCHA_SECRET_KEY)
+
+def verify_recaptcha(token, ip):
+    try:
+        r = requests.post(
+            "https://www.google.com/recaptcha/api/siteverify",
+            data={
+                "secret": RECAPTCHA_SECRET_KEY,
+                "response": token,
+                "remoteip": ip
+            },
+            timeout=5
+        )
+        return r.json().get("success", False)
+    except Exception:
+        return False
+
 app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY", "dev")
 
 SMTP_HOST = os.getenv("SMTP_HOST")
@@ -372,6 +405,32 @@ threading.Thread(target=mail_worker, daemon=True).start()
 
 def enqueue(msg):
     mail_queue.put(msg)
+def send_support_notification(name, email, phone, github, message):
+    year = datetime.datetime.now().year
+
+    body = f"""
+New contact enquiry received on HackRoot
+
+Name   : {name}
+Email  : {email}
+Phone  : {phone}
+Profile: {github}
+
+Message:
+{message}
+
+---
+Year: {year}
+"""
+
+    msg = EmailMessage()
+    msg["From"] = f"HackRoot Enquiry <{SYSTEM_SENDER_EMAIL}>"
+    msg["To"] = SUPPORT_EMAIL
+    msg["Reply-To"] = email
+    msg["Subject"] = f"📩 New Enquiry from {name}"
+    msg.set_content(body)
+
+    enqueue(msg)
 
 # ===============================
 # ROUTES
@@ -389,16 +448,48 @@ def home():
       <button type="submit">Send</button>
     </form>
     """
+import time   # 🔴 make sure this import exists at top
 
 @app.route("/submit", methods=["POST"])
+@limiter.limit("10 per minute")
 def submit():
+
+    # 🛡 1. HONEYPOT (FIRST)
+    if request.form.get("company"):
+        return {"status": "blocked"}, 200
+
+    # ⏱️ 2. TIMING CHECK (SECOND)
+    submitted_at = request.form.get("_ts")
+    if submitted_at:
+        try:
+            delta = time.time() - float(submitted_at)
+            if delta < 3:   # under 3 seconds = bot
+                return {"status": "blocked"}, 200
+        except:
+            pass
+
+    # 🔐 3. CAPTCHA (THIRD)
+    captcha_token = request.form.get("g-recaptcha-response")
+    if not captcha_token:
+        return {"status": "error", "message": "Captcha missing"}, 400
+
+    if not verify_recaptcha(captcha_token, request.remote_addr):
+        return {"status": "error", "message": "Captcha failed"}, 403
+
+    # ✅ 4. NOW SAFE TO READ REAL DATA
     name = request.form.get("name","")
     email = request.form.get("email","")
     phone = request.form.get("phone","")
     github = request.form.get("github","")
     message = request.form.get("message","")
 
-    phone_digits = re.sub(r"\\D","", phone)
+    # rest of your existing logic...
+
+
+    # rest of your logic...
+
+
+    phone_digits = re.sub(r"\D", "", phone)
     display_phone = f"+91{phone_digits}" if len(phone_digits)==10 else ""
 
     year = datetime.datetime.now().year
@@ -420,6 +511,14 @@ def submit():
     msg.attach(MIMEText(html_body, "html"))
 
     enqueue(msg)
+    send_support_notification(
+    name=name,
+    email=email,
+    phone=display_phone,
+    github=github,
+    message=message
+)
+
     return {"status": "success"}, 200
 
 # ===============================
