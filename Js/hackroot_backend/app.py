@@ -7,31 +7,64 @@ import datetime
 import html as html_lib
 import re
 import requests
+import time
+
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from flask_cors import CORS
+from dotenv import load_dotenv
 
 from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-from flask_cors import CORS
-
-from flask import Flask, request, jsonify, render_template_string
-from dotenv import load_dotenv
-
 
 # ===============================
 # LOAD ENV
 # ===============================
 load_dotenv()
 
+# ===============================
+# CREATE APP FIRST
+# ===============================
 app = Flask(__name__)
+
+# ===============================
+# MYSQL CONFIG (FROM .env)
+# ===============================
+DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
+DB_PORT = os.getenv("DB_PORT", "3306")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+DB_NAME = os.getenv("DB_NAME")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# ===============================
+# INIT EXTENSIONS
+# ===============================
+db = SQLAlchemy(app)
+
+class Contact(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    message = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
 CORS(app)
 limiter = Limiter(
     get_remote_address,
     app=app,
     default_limits=[]
 )
+
+app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY", "dev")
+
 # ===============================
 # RECAPTCHA VERIFY
 # ===============================
@@ -454,21 +487,20 @@ import time   # 🔴 make sure this import exists at top
 @limiter.limit("10 per minute")
 def submit():
 
-    # 🛡 1. HONEYPOT (FIRST)
+    # 🛡 1. HONEYPOT
     if request.form.get("company"):
         return {"status": "blocked"}, 200
 
-    # ⏱️ 2. TIMING CHECK (SECOND)
+    # ⏱️ 2. TIMING CHECK
     submitted_at = request.form.get("_ts")
     if submitted_at:
         try:
-            delta = time.time() - float(submitted_at)
-            if delta < 3:   # under 3 seconds = bot
+            if time.time() - float(submitted_at) < 3:
                 return {"status": "blocked"}, 200
         except:
             pass
 
-    # 🔐 3. CAPTCHA (THIRD)
+    # 🔐 3. CAPTCHA
     captcha_token = request.form.get("g-recaptcha-response")
     if not captcha_token:
         return {"status": "error", "message": "Captcha missing"}, 400
@@ -476,28 +508,40 @@ def submit():
     if not verify_recaptcha(captcha_token, request.remote_addr):
         return {"status": "error", "message": "Captcha failed"}, 403
 
-    # ✅ 4. NOW SAFE TO READ REAL DATA
-    name = request.form.get("name","")
-    email = request.form.get("email","")
-    phone = request.form.get("phone","")
-    github = request.form.get("github","")
-    message = request.form.get("message","")
-
-    # rest of your existing logic...
-
-
-    # rest of your logic...
-
+    # ✅ 4. READ FORM DATA
+    name = request.form.get("name", "")
+    email = request.form.get("email", "")
+    phone = request.form.get("phone", "")
+    github = request.form.get("github", "")
+    message = request.form.get("message", "")
 
     phone_digits = re.sub(r"\D", "", phone)
-    display_phone = f"+91{phone_digits}" if len(phone_digits)==10 else ""
+    display_phone = f"+91{phone_digits}" if len(phone_digits) == 10 else ""
 
+    # ===============================
+    # ✅ SAVE TO DATABASE (CORRECT)
+    # ===============================
+    try:
+        contact = Contact(
+            name=name,
+            email=email,
+            message=message
+        )
+        db.session.add(contact)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print("DB ERROR:", e)
+
+    # ===============================
+    # 📧 EMAIL LOGIC
+    # ===============================
     year = datetime.datetime.now().year
 
     html_body = (PREMIUM_HTML_TEMPLATE
         .replace("__YEAR__", str(year))
         .replace("__NAME__", html_lib.escape(name))
-        .replace("__MESSAGE__", html_lib.escape(message).replace("\\n","<br>"))
+        .replace("__MESSAGE__", html_lib.escape(message).replace("\n","<br>"))
         .replace("__PHONE_BLOCK__", f"<br><b>Phone:</b> {display_phone}" if display_phone else "")
         .replace("__GITHUB_BLOCK__", f"<br><b>Profile:</b> {html_lib.escape(github)}" if github else "")
         .replace("__RECIPIENT__", SUPPORT_EMAIL)
@@ -511,15 +555,17 @@ def submit():
     msg.attach(MIMEText(html_body, "html"))
 
     enqueue(msg)
+
     send_support_notification(
-    name=name,
-    email=email,
-    phone=display_phone,
-    github=github,
-    message=message
-)
+        name=name,
+        email=email,
+        phone=display_phone,
+        github=github,
+        message=message
+    )
 
     return {"status": "success"}, 200
+
 
 # ===============================
 # RUN

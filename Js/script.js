@@ -675,10 +675,11 @@ window.addEventListener("scroll", () => {
   const githubBtn = document.getElementById("ppGithub");
   const demoBtn = document.getElementById("ppDemo");
 const TEAM_MAP = {
-  prateek: { name: "Prateek", img: "Assets/my pic.jpg" },
+  prateek: { name: "Prateek", img: "Assets/prateek.png" },
   suchi: { name: "Suchi", img: "Assets/suchi.jpeg" },
   krishna: { name: "Krishna", img: "Assets/krishna.jpeg" },
   lakshya: { name: "Lakshya", img: "Assets/lakshya.jpg" },
+  lakshya: { name: "Deepak", img: "Assets/deepak.jpeg" },
   shivi: { name: "Shivi", img: "Assets/shivi.jpeg" }
 };
 
@@ -998,7 +999,7 @@ const TEAM_DATA = {
   prateek: {
     name: "Prateek",
     role: "AI/ML · Backend Lead",
-    avatar: "Assets/my pic.jpg",
+    avatar: "Assets/prateek.png",
     desc: "Leads architecture, AI pipelines, backend APIs, and deployment.",
     projects: ["AI Fake News", "Healthcare AI"],
     timeline: [
@@ -1068,7 +1069,23 @@ const TEAM_DATA = {
     ],
     github: "https://github.com/shivigoel9/",
     linkedin: "https://www.linkedin.com/in/shivi-goel-604845327/"
-  }
+  },
+
+  deepak: {
+  name: "Deepak",
+  role: "Backend & API Engineer",
+  avatar: "Assets/deepak.jpeg",
+  desc: "Designs scalable backend services, builds secure APIs, and ensures smooth data flow between systems.",
+  projects: ["Flask", "Node", "REST APIs"],
+  timeline: [
+    "API architecture design",
+    "Database schema planning",
+    "Backend security & auth",
+    "Performance optimization"
+  ],
+  github: "https://github.com/deepak2207-git/",
+  linkedin: "https://www.linkedin.com/in/deepak-yadav-3184473a2/"
+}
 };
 
 const teamQuickView = document.getElementById("teamQuickView");
